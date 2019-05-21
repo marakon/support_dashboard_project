@@ -13,7 +13,7 @@ class Call:
 
     def unassignedQueue(self):
         """API call to unassigned queue."""
-        r = requests.get(self.unassigned, auth=auth.athorization_key)
+        r = requests.get(self.unassigned, auth=auth.authorization_key)
         if r.status_code != 200:
             print('Status:', r.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -21,7 +21,7 @@ class Call:
 
     def allViews(self):
         """API call to get all view in case of implementing new one. Best to send into JsonOperation().dump() function."""
-        r = requests.get(self.all, auth=auth.athorization_key)
+        r = requests.get(self.all, auth=auth.authorization_key)
         if r.status_code != 200:
             print('Status:', r.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -29,7 +29,7 @@ class Call:
 
     def myOpenTickets(self):
         """API call to my open tickets queue."""
-        r = requests.get(self.open, auth=auth.athorization_key)
+        r = requests.get(self.open, auth=auth.authorization_key)
         if r.status_code != 200:
             print('Status:', r.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -37,7 +37,7 @@ class Call:
 
     def poznanTickets(self):
         """API call to my open tickets queue."""
-        r = requests.get(self.poznan, auth=auth.athorization_key)
+        r = requests.get(self.poznan, auth=auth.authorization_key)
         if r.status_code != 200:
             print('Status:', r.status_code, 'Problem with the request. Exiting.')
             exit()
