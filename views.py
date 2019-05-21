@@ -1,4 +1,4 @@
-"""Sample list of view available in zendesk."""
+"""List of view available in zendesk(dict format)."""
 main_path = 'https://egnyte.zendesk.com/api/v2/views'
 view_unassigned = {
     "id":461492,
@@ -24,3 +24,4 @@ view_open = {
     "id":461487,
     "title":"My Open tickets"
     }
+# Add new views below in the same configuration.
