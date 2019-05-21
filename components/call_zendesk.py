@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import requests
 
-from data import auth
-from data import views
+from components.files import views
+from components.files import auth
 
 class Call:
     """ This class is doing API calls to get data about certian views.

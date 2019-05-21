@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """List of view available in zendesk(dict format)."""
 main_path = 'https://egnyte.zendesk.com/api/v2/views'
 view_unassigned = {
