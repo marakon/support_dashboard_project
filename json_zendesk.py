@@ -8,11 +8,10 @@ class JsonOperation:
         self.data = js
     
     def dump(self):
-        """This function will generate a nice tree view for the given json. This is an object ready to view."""
-        action = json.dumps(self.data.json())
-        with open('views.txt', 'w') as json_file:  
-            json.dump(action, json_file)
-        return action
+        """This function will generate a json file with given data."""
+        with open('tickets.json', 'w') as json_file:  
+            json.dump(self.data, json_file)
+        return json_file
     
     def load(self):
         """This function generates data ready to send into different view of DataHandler() class."""
