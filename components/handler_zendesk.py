@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class DataHandler:
     """ This class is storing data about tickets and handling it.
         Requires loaded data from JsonOpeartion().load() function.

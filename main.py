@@ -1,6 +1,8 @@
-import call_zendesk
-import handler_zendesk
-import json_zendesk
+#!/usr/bin/python3
+from components import call_zendesk
+from components import handler_zendesk
+from components import json_zendesk
+
 import eel
 
 eel.init("web")
