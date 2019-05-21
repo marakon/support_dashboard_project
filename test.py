@@ -6,4 +6,4 @@ test_call = call_zendesk.Call().unassignedQueue()
 
 test_response = json_zendesk.JsonOperation(test_call).load()
 
-print(handler_zendesk.DataHandler(test_response).viewTickets())
+print(type(handler_zendesk.DataHandler(test_response).count))
