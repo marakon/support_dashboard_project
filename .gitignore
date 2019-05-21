@@ -1,1 +1,3 @@
 auth.py
+.vscode
+*.code-workspace
