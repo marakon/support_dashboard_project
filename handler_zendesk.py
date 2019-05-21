@@ -3,7 +3,7 @@ class DataHandler:
         Requires loaded data from JsonOpeartion().load() function.
         This is third called class."""
     def __init__(self, data):
-        self.tickets = data['tickets'] # List of tickets stored in dict 
+        self.tickets = data['tickets'] # List of tickets stored in dict from the response
         self.count = data['count'] # Amount of tickets(objects in list)
 
     def viewTickets(self):
@@ -21,9 +21,9 @@ class DataHandler:
                     self.tickets[i]['created_at'])
 
     def ticketsToJson(self):
-        """This function is viewing the cases on the screen. Requires data from JsonOparation().load() function."""
+        """ This function is preparing a new list of dict that will have only needed data.
+            Requires data from JsonOparation().load() function."""
         tickets = []
-
         if self.count == 0:
             print("Queue clear nice!")
         else:
