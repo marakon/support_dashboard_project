@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>suppDASH</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script>
+        async function getTicketCount() {
+            let value = await eel.ticket_count()();
+            alert(value)
+        }
+    </script>
+</head>
+<body>
+    <button onclick="getTicketCount()">Click to get ticket count</button>
+</body>
+</html>
