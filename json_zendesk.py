@@ -1,5 +1,4 @@
 import json
-import call_zendesk
 
 class JsonOperation:
     """ This class is processing json data into object readble for python.
