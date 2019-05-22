@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 
-class DataHandler:
+class Handler:
     """ This class is processing data about tickets.
         Requires loaded data from 'JsonOpeartion().load()' function.
         This is third called class."""
-    def __init__(self, loaded):
-        if 'tickets' in loaded:
-            self._tickets = loaded['tickets'] # List of tickets stored in dict from the response
-            self._count = loaded['count'] # Amount of tickets(objects in list)
-        if 'views' in loaded:
-            self._views = loaded['views'] # All views in Zendesk
-            self._count = loaded['count'] # Amount of tickets(objects in list)
+    def __init__(self):
+        self._tickets = None # List of tickets stored in dict from the response
+        self._views = None # All views in Zendesk
+        self._count = 0 # Amount of tickets(objects in list)
+        self._premium = 0
 
     def viewTicketsCMD(self):
         """ This function is viewing the cases in the CMD.
@@ -84,16 +82,37 @@ class DataHandler:
         return _tickets
 
 
-# GETTERS FOR SINGLE VALUES
+# GETTERS AND SETTERS
 #============================================================================================================#
-    def getPremiumCount(self):
+    @property
+    def premiumCount(self):
         """Returns premium count of the given view."""
-        _num_prem = 0
+        return self._premium
+
+    @premiumCount.setter
+    def premiumCount(self, loaded):
         for i in range(0, self._count):
             if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
-                num_prem += 1
-        return _num_prem
+                self._premium += 1
+    
 
-    def getTicketCount(self):
+    @property
+    def ticketCount(self):
         """Returns tickets count of the given view."""
         return self._count
+
+    @ticketCount.setter
+    def ticketCount(self, loaded):
+        self._count = loaded['count']
+
+    @property
+    def tickets(self):
+        """Returns tickets count of the given view."""
+        return self._tickets
+
+    @tickets.setter
+    def tickets(self, loaded):
+        if 'tickets' in loaded:
+            self._tickets = loaded['tickets']
+        if 'views' in loaded:
+            self._views = loaded['views']

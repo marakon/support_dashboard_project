@@ -14,24 +14,28 @@ class Call:
         self._poznan = '{0}/{1}/tickets.json'.format(v.main_path, v.view_poznan['id'])
         # Space below to add more views
 
+    @property
     def unassignedQueue(self):
         """API call to unassigned queue."""
         response = requests.get(self._unassigned, auth=key)
         if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
         return response
 
+    @property
     def allViews(self):
         """API call to get all view in case of implementing new one. Best to send into JsonOperation().dump() function."""
         response = requests.get(self._compact, auth=key)
         if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
         return response
 
+    @property
     def myOpenTickets(self):
         """API call to my open tickets queue."""
         response = requests.get(self._open, auth=key)
         if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
         return response
 
+    @property
     def poznanTickets(self):
         """API call to my open tickets queue."""
         response = requests.get(self._poznan, auth=key)
