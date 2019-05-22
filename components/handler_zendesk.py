@@ -48,3 +48,6 @@ class DataHandler:
                 _ticket['creation_date'] = self._tickets[i]['created_at']
                 tickets.append(_ticket)
         return tickets
+    
+    def count(self):
+        return self._count
