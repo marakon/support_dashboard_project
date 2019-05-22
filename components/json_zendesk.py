@@ -13,7 +13,6 @@ class JsonOperation:
             Please call it after processing the data in DataHandler()"""
         with open('tickets.json', 'w') as json_file:  
             j.dump(self._data, json_file)
-        return json_file
     
     def load(self):
         """This function generates data ready to send into different view of DataHandler() class."""
