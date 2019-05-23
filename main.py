@@ -27,6 +27,16 @@ def teamTaken():
     (taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB) = taken_handle.ticketsPerAgent()
     return taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB
 
+def teamSolved():
+    solved_call = call_module.ZendeskCall()
+    solved_handle = handler_module.Calculate()
+    solved_raw = solved_call.teamSolved
+    solved = json_module.JsonOperation(solved_raw)
+    solved_loaded = solved.load()
+    (solved_handle.tickets, solved_handle.ticketCount) = (solved_loaded, solved_loaded)
+    (solved_bR, solved_nM, solved_mO, solved_hW, solved_aS, solved_wN, solved_mB) = solved_handle.ticketsPerAgent()
+    return solved_bR, solved_nM, solved_mO, solved_hW, solved_aS, solved_wN, solved_mB
+
 #==========================================================================================#
 # Variables
 
@@ -35,8 +45,11 @@ def test_request():
     (un_ticketCount, un_platinum, un_premium, unassigned_list) = unassigned()
     return un_ticketCount
 
-# Premium and platinum together
+# Tickets taken last 12h per agent
 (taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB) = teamTaken()
+
+# Tickets solved last 12h per agent
+(solved_bR, solved_nM, solved_mO, solved_hW, solved_aS, solved_wN, solved_mB) = teamSolved()
 
 #List of unassigned queue
 
@@ -47,6 +60,5 @@ def test_request():
 # def ticket_count():
 #     return un_ticketCount
 
-print(test_request())
 
 eel.start("index.html", size=(1280, 720))

@@ -13,7 +13,8 @@ class ZendeskCall:
         self._compact = '{0}/compact.json'.format(v.main_path)
         self._open = '{0}/{1}/tickets.json'.format(v.main_path, v.view_open['id'])
         self._poznan = '{0}/{1}/tickets.json'.format(v.main_path, v.view_poznan['id'])
-        self._team = '{0}/{1}/tickets.json'.format(v.main_path, v.view_team['id'])
+        self._team_taken = '{0}/{1}/tickets.json'.format(v.main_path, v.view_team_taken['id'])
+        self._team_solved = '{0}/{1}/tickets.json'.format(v.main_path, v.view_team_solved['id'])
         # Space below to add more views
 
     @property
@@ -57,12 +58,20 @@ class ZendeskCall:
     @property
     def teamTaken(self):
         """API call to my open tickets queue."""
-        response = requests.get(self._team, auth=auth.key)
+        response = requests.get(self._team_taken, auth=auth.key)
         if response.status_code != 200:
             print('Status:', response.status_code, 'Problem with the request. Exiting.')
             exit()
         return response
 
+    @property
+    def teamSolved(self):
+        """API call to my open tickets queue."""
+        response = requests.get(self._team_solved, auth=auth.key)
+        if response.status_code != 200:
+            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+            exit()
+        return response
 
 
 # class JiraCall:
