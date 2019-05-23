@@ -13,36 +13,6 @@ class Calculate:
         self._platinum = 0
 
 #==============================SETTERS============================GETTERS====================================#
-    @property
-    def premiumCount(self):
-        """Returns premium count of the given view."""
-        return self._premium
-
-    @premiumCount.setter
-    def premiumCount(self, loaded):
-        for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
-                self._platinum += 1
-    
-    @property
-    def platinumCount(self):
-        """Returns platinum count of the given view."""
-        return self._premium
-
-    @platinumCount.setter
-    def platinumCount(self, loaded):
-        for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
-                self._platinum += 1
-    
-    @property
-    def ticketCount(self):
-        """Returns tickets count of the given view."""
-        return self._count
-
-    @ticketCount.setter
-    def ticketCount(self, loaded):
-        self._count = loaded['count']
 
     @property
     def tickets(self):
@@ -54,6 +24,37 @@ class Calculate:
             self._tickets = loaded['tickets']
         if 'views' in loaded:
             self._views = loaded['views']
+
+    @property
+    def premiumCount(self):
+        """Returns premium count of the given view."""
+        return self._premium
+
+    @premiumCount.setter
+    def premiumCount(self, loaded):
+        for i in range(0, self._count):
+            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
+                self._premium += 1
+    
+    @property
+    def platinumCount(self):
+        """Returns platinum count of the given view."""
+        return self._platinum
+
+    @platinumCount.setter
+    def platinumCount(self, loaded):
+        for i in range(0, self._count):
+            if self._tickets[i]['custom_fields'][15]['value'] == 'platinum':
+                self._platinum += 1
+    
+    @property
+    def ticketCount(self):
+        """Returns tickets count of the given view."""
+        return self._count
+
+    @ticketCount.setter
+    def ticketCount(self, loaded):
+        self._count = loaded['count']
 
 #============================================================================================================#
     @property
@@ -113,7 +114,7 @@ class Calculate:
             _view['active'] = self._views[i]['active']
             _views.append(_view)
         return _views
-    
+    @property
     def unassignedView(self):
         """ This function is preparing a new list of dict that will have only needed data.
             Requires data from JsonOparation().load() function."""
