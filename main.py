@@ -5,7 +5,7 @@ from components import json_module
 
 import eel
 
-eel.init("web")
+# eel.init("web")
 
 def unassigned():
     unassigned_call = call_module.ZendeskCall()
@@ -13,7 +13,7 @@ def unassigned():
     unassigned_raw = unassigned_call.unassignedQueue
     unassigned = json_module.JsonOperation(unassigned_raw)
     unassigned_loaded = unassigned.load()
-    (unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount) = (unassigned_loaded, unassigned_loaded, unassigned_loaded)
+    (unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount, unassigned_handle.tickets) = (unassigned_loaded, unassigned_loaded, unassigned_loaded, unassigned_loaded)
     unassigned_view = unassigned_handle.unassignedView()
     return unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount, unassigned_view
 
@@ -30,8 +30,8 @@ prem_and_plat = un_premium + un_platinum
 #==========================================================================================#
 
 
-@eel.expose
-def ticket_count():
-    return un_ticketsCount
+# @eel.expose
+# def ticket_count():
+#     return un_ticketsCount
 
-eel.start("index.html", size=(1280, 720))
+# eel.start("index.html", size=(1280, 720))
