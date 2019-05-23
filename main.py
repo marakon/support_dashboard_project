@@ -7,9 +7,9 @@ import eel
 
 eel.init("web")
 
-call = cz.Call()
-jops = jz.JsonOperation()
-handle = hz.Calculate()
+call = call_module.ZendeskCall()
+jops = json_module.JsonOperation()
+handle = handler_module.Calculate()
 
 unassigned = call.unassignedQueue
 print(unassigned)

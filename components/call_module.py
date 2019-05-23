@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 import requests
+from jira import JIRA
 
 from components.files import views as v
-from components.files.auth import key
+from components.files import auth
 
-class Call:
+class ZendeskCall:
     """ This class is doing API calls to get data about certian views.
         This is first called class."""
     def __init__(self):
@@ -17,29 +18,42 @@ class Call:
     @property
     def unassignedQueue(self):
         """API call to unassigned queue."""
-        response = requests.get(self._unassigned, auth=key)
+        response = requests.get(self._unassigned, auth=auth.key)
         if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
         return response
 
     @property
     def allViews(self):
         """API call to get all view in case of implementing new one. Best to send into JsonOperation().dump() function."""
-        response = requests.get(self._compact, auth=key)
+        response = requests.get(self._compact, auth=auth.key)
         if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
         return response
 
     @property
     def myOpenTickets(self):
         """API call to my open tickets queue."""
-        response = requests.get(self._open, auth=key)
+        response = requests.get(self._open, auth=auth.key)
         if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
         return response
 
     @property
     def poznanTickets(self):
         """API call to my open tickets queue."""
-        response = requests.get(self._poznan, auth=key)
+        response = requests.get(self._poznan, auth=auth.key)
         if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
         return response
     
     # If you add new view in __init__ create a new function that will do call with its view.
+
+
+
+
+
+class JiraCall:
+
+    jira = JIRA('https://jira.egnyte-it.com', auth=auth.jira_key)
+
+    issue = jira.issue('ESC-17609')
+    print (issue.fields.project.key)
+    print (issue.fields.issuetype.name)
+    print (issue.fields.reporter.displayName)
