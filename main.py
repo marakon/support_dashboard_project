@@ -7,15 +7,19 @@ import eel
 
 eel.init("web")
 
-test_call = call_module.Call()
-unassigned_response = test_call.unassignedQueue
+call = cz.Call()
+jops = jz.JsonOperation()
+handle = hz.Calculate()
 
-loaded_unassigned_response = json_module.JsonOperation(unassigned_response).load()
-handle = handler_module.Handler()
-handle.ticketCount = loaded_unassigned_response
+unassigned = call.unassignedQueue
+print(unassigned)
+jops.response = unassigned
+loaded_unassigned = jops.load
+(handle.tickets, handle.ticketCount) = (loaded_unassigned, loaded_unassigned)
+
 
 @eel.expose
 def ticket_count():
-    return handle.ticketCount
+    return handle.unassignedView
 
 eel.start("index.html", size=(600, 600))

@@ -44,7 +44,7 @@ class Calculate:
             self._views = loaded['views']
 
 #============================================================================================================#
-
+    @property
     def viewInCMD(self):
         """ This function is viewing the cases in the CMD.
             Requires data from JsonOparation().load() function."""
