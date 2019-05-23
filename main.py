@@ -20,7 +20,12 @@ def unassigned():
 #==========================================================================================#
 # Variables
 
-(un_ticketCount, un_platinum, un_premium, unassigned_list) = unassigned()
+@eel.expose
+def test_request():
+    (un_ticketCount, un_platinum, un_premium, unassigned_list) = unassigned()
+    list_of_counts = [un_ticketCount, un_premium]
+
+    return list_of_counts
 
 # Premium and platinum together
 
@@ -30,10 +35,10 @@ def unassigned():
 #==========================================================================================#
 
 
-@eel.expose
-def ticket_count():
-    return un_ticketCount
+# @eel.expose
+# def ticket_count():
+#     return un_ticketCount
 
-print(ticket_count())
+print(test_request())
 
 eel.start("index.html", size=(1280, 720))
