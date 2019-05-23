@@ -3,14 +3,12 @@ from components import call_module as cz
 from components import handler_module as hz
 from components import json_module as jz
 
-call = cz.Call()
+call = cz.ZendeskCall()
 jops = jz.JsonOperation()
 handle = hz.Calculate()
 
 unassigned = call.unassignedQueue
-print(unassigned)
 jops.response = unassigned
 loaded_unassigned = jops.load
 (handle.tickets, handle.ticketCount) = (loaded_unassigned, loaded_unassigned)
-
-print(handle.ticketCount)
+print(handle.viewInCMD)

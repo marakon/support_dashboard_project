@@ -7,7 +7,7 @@ import eel
 
 eel.init("web")
 
-call = call_module.Call()
+call = call_module.ZendeskCall()
 jops = json_module.JsonOperation()
 handle = handler_module.Calculate()
 
