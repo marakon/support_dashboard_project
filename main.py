@@ -33,9 +33,7 @@ def teamTaken():
 @eel.expose
 def test_request():
     (un_ticketCount, un_platinum, un_premium, unassigned_list) = unassigned()
-    list_of_counts = [un_ticketCount, un_premium]
-
-    return list_of_counts
+    return un_ticketCount
 
 # Premium and platinum together
 (taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB) = teamTaken()
