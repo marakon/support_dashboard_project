@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import datetime
 
 class Calculate:
     """ This class is processing data about tickets.
@@ -25,10 +26,10 @@ class Calculate:
     
     @property
     def platinumCount(self):
-        """Returns premium count of the given view."""
+        """Returns platinum count of the given view."""
         return self._premium
 
-    @premiumCount.setter
+    @platinumCount.setter
     def platinumCount(self, loaded):
         for i in range(0, self._count):
             if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
@@ -45,7 +46,6 @@ class Calculate:
 
     @property
     def tickets(self):
-        """Returns tickets count of the given view."""
         return self._tickets
 
     @tickets.setter
@@ -127,7 +127,7 @@ class Calculate:
                 'priority':'',
                 'created_at':''
             }
-            _ticket['subject'] = self._tickets[i]['id']
+            _ticket['id'] = self._tickets[i]['id']
             _ticket['subject'] = self._tickets[i]['subject']
             _ticket['domain_name'] = self._tickets[i]['custom_fields'][5]['value']
             _ticket['plan'] = self._tickets[i]['custom_fields'][15]['value']
@@ -151,7 +151,3 @@ class Calculate:
                 _ticket['status'] = self._tickets[i]['custom_fields'][25]['value']
                 _tickets.append(_ticket)
         return _tickets
-    
-
-
-

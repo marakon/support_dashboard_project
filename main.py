@@ -13,19 +13,19 @@ def unassigned():
     unassigned_raw = unassigned_call.unassignedQueue
     unassigned = json_module.JsonOperation(unassigned_raw)
     unassigned_loaded = unassigned.load()
-    (unassigned_handle.tickets, unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount) = (unassigned_loaded, unassigned_loaded, unassigned_loaded, unassigned_loaded)
-    return unassigned_handle.tickets, unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount
+    (unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount) = (unassigned_loaded, unassigned_loaded, unassigned_loaded)
+    unassigned_view = unassigned_handle.unassignedView()
+    return unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount, unassigned_view
 
 #==========================================================================================#
 # Variables
 
-(un_tickets, un_ticketsCount, un_platinum, un_premium) = unassigned()
+(un_ticketsCount, un_platinum, un_premium, unassigned_list) = unassigned()
 
 # Premium and platinum together
 prem_and_plat = un_premium + un_platinum
 
-# List of unassigned queue
-unassignedView = un_tickets.unassignedView()
+#List of unassigned queue
 
 #==========================================================================================#
 
