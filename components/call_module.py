@@ -20,28 +20,36 @@ class ZendeskCall:
     def unassignedQueue(self):
         """API call to unassigned queue."""
         response = requests.get(self._unassigned, auth=auth.key)
-        if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        if response.status_code != 200:
+            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+            exit()
         return response
 
     @property
     def allViews(self):
         """API call to get all view in case of implementing new one. Best to send into JsonOperation().dump() function."""
         response = requests.get(self._compact, auth=auth.key)
-        if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        if response.status_code != 200:
+            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+            exit()
         return response
 
     @property
     def myOpenTickets(self):
         """API call to my open tickets queue."""
         response = requests.get(self._open, auth=auth.key)
-        if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        if response.status_code != 200:
+            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+            exit()
         return response
 
     @property
     def poznanTickets(self):
         """API call to my open tickets queue."""
         response = requests.get(self._poznan, auth=auth.key)
-        if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        if response.status_code != 200:
+            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+            exit()
         return response
     
     # If you add new view in __init__ create a new function that will do call with its view.
@@ -50,7 +58,9 @@ class ZendeskCall:
     def teamTaken(self):
         """API call to my open tickets queue."""
         response = requests.get(self._team, auth=auth.key)
-        if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        if response.status_code != 200:
+            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+            exit()
         return response
 
 

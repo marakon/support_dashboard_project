@@ -31,13 +31,7 @@ def teamTaken():
 # Premium and platinum together
 
 (taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB) = teamTaken()
-print(taken_bR)
-print(taken_nM)
-print(taken_mO)
-print(taken_hW)
-print(taken_aS)
-print(taken_wN)
-print(taken_mB)
+
 #List of unassigned queue
 
 #==========================================================================================#
