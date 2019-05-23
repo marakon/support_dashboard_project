@@ -7,19 +7,35 @@ import eel
 
 eel.init("web")
 
-call = call_module.ZendeskCall()
-jops = json_module.JsonOperation()
-handle = handler_module.Calculate()
+unassigned_call = call_module.ZendeskCall()
+unassigned_handle = handler_module.Calculate()
+unassigned_raw = unassigned_call.unassignedQueue
+unassigned = json_module.JsonOperation(unassigned_raw)
+unassigned_loaded = unassigned.load()
+(unassigned_handle.tickets, unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount) = (unassigned_loaded, unassigned_loaded, unassigned_loaded, unassigned_loaded)
 
-unassigned = call.unassignedQueue
-print(unassigned)
-jops.response = unassigned
-loaded_unassigned = jops.load
-(handle.tickets, handle.ticketCount) = (loaded_unassigned, loaded_unassigned)
+#==========================================================================================#
+# Variables
+
+# Number of premium cases
+premium = unassigned_handle.premiumCount
+
+# Number of platinum cases
+platinum = unassigned_handle.platinumCount
+
+# Premium and platinum together
+prem_and_plat = premium + platinum
+
+# List of unassigned queue
+unassignedView = unassigned_handle.unassignedView()
+
+# Number of tickets in unassigned
+ticketsCount = unassigned_handle.ticketCount
+#==========================================================================================#
 
 
 @eel.expose
 def ticket_count():
-    return handle.unassignedView
+    return unassignedView
 
 eel.start("index.html", size=(600, 600))
