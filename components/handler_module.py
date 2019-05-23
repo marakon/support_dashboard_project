@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-class Handler:
+class Calculate:
     """ This class is processing data about tickets.
         Requires loaded data from 'JsonOpeartion().load()' function.
         This is third called class."""
@@ -10,7 +10,42 @@ class Handler:
         self._count = 0 # Amount of tickets(objects in list)
         self._premium = 0
 
-    def viewTicketsCMD(self):
+#==============================SETTERS============================GETTERS====================================#
+    @property
+    def premiumCount(self):
+        """Returns premium count of the given view."""
+        return self._premium
+
+    @premiumCount.setter
+    def premiumCount(self, loaded):
+        for i in range(0, self._count):
+            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
+                self._premium += 1
+    
+    @property
+    def ticketCount(self):
+        """Returns tickets count of the given view."""
+        return self._count
+
+    @ticketCount.setter
+    def ticketCount(self, loaded):
+        self._count = loaded['count']
+
+    @property
+    def tickets(self):
+        """Returns tickets count of the given view."""
+        return self._tickets
+
+    @tickets.setter
+    def tickets(self, loaded):
+        if 'tickets' in loaded:
+            self._tickets = loaded['tickets']
+        if 'views' in loaded:
+            self._views = loaded['views']
+
+#============================================================================================================#
+
+    def viewInCMD(self):
         """ This function is viewing the cases in the CMD.
             Requires data from JsonOparation().load() function."""
         if self._count == 0:
@@ -25,7 +60,7 @@ class Handler:
                     self._tickets[i]['id'], '\t',
                     self._tickets[i]['created_at'])
 
-    def ticketsToJson(self):
+    def detailedTickets(self):
         """ This function is preparing a new list of dict that will have only needed data.
             Requires data from JsonOparation().load() function."""
         _clear = "Queue clear nice!"
@@ -80,39 +115,3 @@ class Handler:
             _ticket['domain_name'] = self._tickets[i]['custom_fields'][5]['value']
             _tickets.append(_ticket)
         return _tickets
-
-
-# GETTERS AND SETTERS
-#============================================================================================================#
-    @property
-    def premiumCount(self):
-        """Returns premium count of the given view."""
-        return self._premium
-
-    @premiumCount.setter
-    def premiumCount(self, loaded):
-        for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
-                self._premium += 1
-    
-
-    @property
-    def ticketCount(self):
-        """Returns tickets count of the given view."""
-        return self._count
-
-    @ticketCount.setter
-    def ticketCount(self, loaded):
-        self._count = loaded['count']
-
-    @property
-    def tickets(self):
-        """Returns tickets count of the given view."""
-        return self._tickets
-
-    @tickets.setter
-    def tickets(self, loaded):
-        if 'tickets' in loaded:
-            self._tickets = loaded['tickets']
-        if 'views' in loaded:
-            self._views = loaded['views']
