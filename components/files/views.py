@@ -25,14 +25,16 @@ view_open = {
     "id":461487,
     "title":"My Open tickets"
     }
-view_team = {
+view_team_taken = {
     'id':360066781132,
     'title':'Team taken last 12h',
     }
-view_jburda = {
-    'id':360067067791,
-    'title':'Jakub Tickets',
+view_team_solved = {
+    'id':360066781132,
+    'title':'Team solved last 12h',
     }
+
+
 view_nmagon = {
     'id':360067067931,
     'title':'Natalia Tickets',

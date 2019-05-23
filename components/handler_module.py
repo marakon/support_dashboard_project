@@ -152,13 +152,7 @@ class Calculate:
     def ticketsPerAgent(self):
         """ This function is preparing a new list of dict that will have only needed data.
             Requires data from JsonOparation().load() function."""
-        _mO = 0
-        _bR = 0
-        _nM = 0
-        _hW = 0
-        _aS = 0
-        _wN = 0
-        _mB = 0
+        (_mO, _bR, _nM, _hW, _aS, _wN, _mB) = (0, 0, 0, 0, 0, 0, 0)
         print(self._count)
         for i in range(self._count):
             if self._tickets[i]['assignee_id'] == 374937979731:
