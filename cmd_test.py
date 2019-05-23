@@ -20,8 +20,8 @@ def teamTaken():
     taken = json_module.JsonOperation(taken_raw)
     taken_loaded = taken.load()
     (taken_handle.tickets, taken_handle.ticketCount) = (taken_loaded, taken_loaded)
-    taken_view = taken_handle.viewInCMD
-    return taken_handle.ticketCount, taken_view
+    (taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB) = taken_handle.ticketsPerAgent()
+    return taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB
 
 #==========================================================================================#
 # Variables
@@ -30,15 +30,14 @@ def teamTaken():
 
 # Premium and platinum together
 
-(taken_ticketCount, taken_list) = teamTaken()
+(taken_bR, taken_nM, taken_mO, taken_hW, taken_aS, taken_wN, taken_mB) = teamTaken()
+print(taken_bR)
+print(taken_nM)
+print(taken_mO)
+print(taken_hW)
+print(taken_aS)
+print(taken_wN)
+print(taken_mB)
 #List of unassigned queue
 
 #==========================================================================================#
-# 'assignee_id'
-# Bremesz = 374937979731
-# Natalia = 360576935392
-# MatO = 360561897751
-# Hubert = 114101112231
-# Ania = 370896464451
-# Wojciech = 372919764412
-# MatB = 114126187612

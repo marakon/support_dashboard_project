@@ -147,3 +147,40 @@ class Calculate:
                 _ticket['status'] = self._tickets[i]['custom_fields'][25]['value']
                 _tickets.append(_ticket)
         return _tickets
+
+
+    def ticketsPerAgent(self):
+        """ This function is preparing a new list of dict that will have only needed data.
+            Requires data from JsonOparation().load() function."""
+        _mO = 0
+        _bR = 0
+        _nM = 0
+        _hW = 0
+        _aS = 0
+        _wN = 0
+        _mB = 0
+        print(self._count)
+        for i in range(self._count):
+            if self._tickets[i]['assignee_id'] == 374937979731:
+                _bR += 1
+            if self._tickets[i]['assignee_id'] == 360576935392:
+                _nM += 1
+            if self._tickets[i]['assignee_id'] == 360561897751:
+                _mO += 1
+            if self._tickets[i]['assignee_id'] == 114101112231:
+                _hW += 1
+            if self._tickets[i]['assignee_id'] == 370896464451:
+                _aS += 1
+            if self._tickets[i]['assignee_id'] == 372919764412:
+                _wN += 1
+            if self._tickets[i]['assignee_id'] == 114126187612:
+                _mB += 1
+        return _bR, _nM, _mO, _hW, _aS, _wN, _mB
+# 'assignee_id'
+# Bremesz = 374937979731
+# Natalia = 360576935392
+# MatO = 360561897751
+# Hubert = 114101112231
+# Ania = 370896464451
+# Wojciech = 372919764412
+# MatB = 114126187612
