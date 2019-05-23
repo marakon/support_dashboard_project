@@ -34,4 +34,4 @@ unassignedView = un_tickets.unassignedView()
 def ticket_count():
     return un_ticketsCount
 
-eel.start("index.html", size=(600, 600))
+eel.start("index.html", size=(1280, 720))
