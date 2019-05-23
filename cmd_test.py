@@ -12,3 +12,5 @@ print(unassigned)
 jops.response = unassigned
 loaded_unassigned = jops.load
 (handle.tickets, handle.ticketCount) = (loaded_unassigned, loaded_unassigned)
+
+print(handle.ticketCount)
