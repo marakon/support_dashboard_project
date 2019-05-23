@@ -66,12 +66,7 @@ class Calculate:
         else:
             print("Current number of tickets: {0}".format(self._count))
             for i in range(0,self._count):
-                print(self._tickets[i]['subject'], '\t',
-                    self._tickets[i]['status'], '\t',
-                    self._tickets[i]['custom_fields'][5]['value'], '\t',
-                    self._tickets[i]['priority'], '\t',
-                    self._tickets[i]['id'], '\t',
-                    self._tickets[i]['created_at'])
+                print(self._tickets[i])
 
     def detailedTickets(self):
         """ This function is preparing a new list of dict that will have only needed data.

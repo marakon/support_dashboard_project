@@ -13,6 +13,7 @@ class ZendeskCall:
         self._compact = '{0}/compact.json'.format(v.main_path)
         self._open = '{0}/{1}/tickets.json'.format(v.main_path, v.view_open['id'])
         self._poznan = '{0}/{1}/tickets.json'.format(v.main_path, v.view_poznan['id'])
+        self._team = '{0}/{1}/tickets.json'.format(v.main_path, v.view_team['id'])
         # Space below to add more views
 
     @property
@@ -45,7 +46,12 @@ class ZendeskCall:
     
     # If you add new view in __init__ create a new function that will do call with its view.
 
-
+    @property
+    def teamTaken(self):
+        """API call to my open tickets queue."""
+        response = requests.get(self._team, auth=auth.key)
+        if response.status_code != 200: print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        return response
 
 
 

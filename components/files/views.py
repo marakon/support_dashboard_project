@@ -25,9 +25,9 @@ view_open = {
     "id":461487,
     "title":"My Open tickets"
     }
-view_mosinski = {
+view_team = {
     'id':360066781132,
-    'title':'Mateusz Tickets',
+    'title':'Team taken last 12h',
     }
 view_jburda = {
     'id':360067067791,
