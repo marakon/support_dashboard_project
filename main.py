@@ -34,4 +34,6 @@ def unassigned():
 def ticket_count():
     return un_ticketCount
 
+print(ticket_count())
+
 eel.start("index.html", size=(1280, 720))
