@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-import requests
+import requests as r
+import json as j
 from jira import JIRA
 
 from components.files import views as v
@@ -20,58 +21,58 @@ class ZendeskCall:
     @property
     def unassignedQueue(self):
         """API call to unassigned queue."""
-        response = requests.get(self._unassigned, auth=auth.key)
-        if response.status_code != 200:
-            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        resp = r.get(self._unassigned, auth=auth.key)
+        if resp.status_code != 200:
+            print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return response
+        return j.loads(resp.text)
 
     @property
     def allViews(self):
         """API call to get all view in case of implementing new one. Best to send into JsonOperation().dump() function."""
-        response = requests.get(self._compact, auth=auth.key)
-        if response.status_code != 200:
-            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        resp = r.get(self._compact, auth=auth.key)
+        if resp.status_code != 200:
+            print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return response
+        return j.loads(resp.text)
 
     @property
     def myOpenTickets(self):
         """API call to my open tickets queue."""
-        response = requests.get(self._open, auth=auth.key)
-        if response.status_code != 200:
-            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        resp = r.get(self._open, auth=auth.key)
+        if resp.status_code != 200:
+            print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return response
+        return j.loads(resp.text)
 
     @property
     def poznanTickets(self):
         """API call to my open tickets queue."""
-        response = requests.get(self._poznan, auth=auth.key)
-        if response.status_code != 200:
-            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        resp = r.get(self._poznan, auth=auth.key)
+        if resp.status_code != 200:
+            print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return response
+        return j.loads(resp.text)
     
     # If you add new view in __init__ create a new function that will do call with its view.
 
     @property
     def teamTaken(self):
         """API call to my open tickets queue."""
-        response = requests.get(self._team_taken, auth=auth.key)
-        if response.status_code != 200:
-            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        resp = r.get(self._team_taken, auth=auth.key)
+        if resp.status_code != 200:
+            print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return response
+        return j.loads(resp.text)
 
     @property
     def teamSolved(self):
         """API call to my open tickets queue."""
-        response = requests.get(self._team_solved, auth=auth.key)
-        if response.status_code != 200:
-            print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        resp = r.get(self._team_solved, auth=auth.key)
+        if resp.status_code != 200:
+            print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return response
+        return j.loads(resp.text)
 
 
 # class JiraCall:
