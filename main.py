@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 from components import call_module
 from components import handler_module
-from components import json_module
 
 import eel
 

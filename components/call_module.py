@@ -4,7 +4,7 @@ import json as j
 from jira import JIRA
 
 from components.files import views as v
-from components.files import auth
+from components.files import auth as a
 
 class ZendeskCall:
     """ This class is doing API calls to get data about certian views.
@@ -21,7 +21,7 @@ class ZendeskCall:
     @property
     def unassignedQueue(self):
         """API call to unassigned queue."""
-        resp = r.get(self._unassigned, auth=auth.key)
+        resp = r.get(self._unassigned, auth=a.key)
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -30,7 +30,7 @@ class ZendeskCall:
     @property
     def allViews(self):
         """API call to get all view in case of implementing new one. Best to send into JsonOperation().dump() function."""
-        resp = r.get(self._compact, auth=auth.key)
+        resp = r.get(self._compact, auth=a.key)
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -39,7 +39,7 @@ class ZendeskCall:
     @property
     def myOpenTickets(self):
         """API call to my open tickets queue."""
-        resp = r.get(self._open, auth=auth.key)
+        resp = r.get(self._open, auth=a.key)
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -48,7 +48,7 @@ class ZendeskCall:
     @property
     def poznanTickets(self):
         """API call to my open tickets queue."""
-        resp = r.get(self._poznan, auth=auth.key)
+        resp = r.get(self._poznan, auth=a.key)
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -59,7 +59,7 @@ class ZendeskCall:
     @property
     def teamTaken(self):
         """API call to my open tickets queue."""
-        resp = r.get(self._team_taken, auth=auth.key)
+        resp = r.get(self._team_taken, auth=a.key)
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
@@ -68,7 +68,7 @@ class ZendeskCall:
     @property
     def teamSolved(self):
         """API call to my open tickets queue."""
-        resp = r.get(self._team_solved, auth=auth.key)
+        resp = r.get(self._team_solved, auth=a.key)
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
