@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import datetime
+from components.files import blueprints as b
 
 class Calculate:
     """ This class is processing data about tickets."""
@@ -10,7 +11,7 @@ class Calculate:
         self._premium = 0
         self._platinum = 0
 
-#======================SETTERS====================GETTERS========================#
+#======================SETTERS====================GETTERS===================#
 
     @property
     def tickets(self):
@@ -31,7 +32,8 @@ class Calculate:
     @premium_count.setter
     def premium_count(self, loaded):
         for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] is 'premium':
+            plan_type = self._tickets[i]['custom_fields'][15]['value']
+            if plan_type is 'premium':
                 self._premium += 1
     
     @property
@@ -42,7 +44,8 @@ class Calculate:
     @platinum_count.setter
     def platinum_count(self, loaded):
         for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] is 'platinum':
+            plan_type = self._tickets[i]['custom_fields'][15]['value']
+            if plan_type is 'platinum':
                 self._platinum += 1
     
     @property
@@ -54,7 +57,7 @@ class Calculate:
     def ticket_count(self, loaded):
         self._count = loaded['count']
 
-#============================================================================================================#
+#===========================================================================#
     @property
     def view_in_cmd(self):
         """ This function is viewing the cases in the CMD.
@@ -70,15 +73,11 @@ class Calculate:
         """ This function is preparing a new list of dict that will have
             ID, title and if the ticket is active."""
         _views = []
-        for i in range(0,self._count):
-            _view = {
-                'id':'',
-                'title':'',
-                'active':'',
-            }
-            _view['id'] = self._views[i]['id']
-            _view['title'] = self._views[i]['title']
-            _view['active'] = self._views[i]['active']
+        for view_number in range(self._count):
+            _view = b.view
+            _view['id'] = self._views[view_number]['id']
+            _view['title'] = self._views[view_number]['title']
+            _view['active'] = self._views[view_number]['active']
             _views.append(_view)
         return _views
         
@@ -86,21 +85,14 @@ class Calculate:
         """ This function is preparing a new list of dict that will have:
             ID, subject, domain_name, plan, priority, created date."""
         _tickets = []
-        for i in range(0,self._count):
-            _ticket = {
-                'id': '',
-                'subject':'',
-                'domain_name':'',
-                'plan':'',
-                'priority':'',
-                'created_at':''
-            }
-            _ticket['id'] = self._tickets[i]['id']
-            _ticket['subject'] = self._tickets[i]['subject']
-            _ticket['domain_name'] = self._tickets[i]['custom_fields'][5]['value']
-            _ticket['plan'] = self._tickets[i]['custom_fields'][15]['value']
-            _ticket['priority'] = self._tickets[i]['priority']
-            _ticket['created_at'] = self._tickets[i]['created_at']
+        for case_number in range(self._count):
+            _ticket = b.unassigned_ticket
+            _ticket['id'] = self._tickets[case_number]['id']
+            _ticket['subject'] = self._tickets[case_number]['subject']
+            _ticket['domain_name'] = self._tickets[case_number]['custom_fields'][5]['value']
+            _ticket['plan'] = self._tickets[case_number]['custom_fields'][15]['value']
+            _ticket['priority'] = self._tickets[case_number]['priority']
+            _ticket['created_at'] = self._tickets[case_number]['created_at']
             _tickets.append(_ticket)
         return _tickets
 
@@ -108,31 +100,32 @@ class Calculate:
         """ This function is preparing a new list of dict that will
             have details about JIRA tickets(number and status)."""
         _tickets = []
-        for i in range(self._count):
-            if (isinstance(self._tickets[i]['custom_fields'][24]['value'], str) and
-            'Waiting For Customer' in self._tickets[i]['custom_fields'][25]['value']):
-            # Field needs to be str and Waiting For Customers state
-                _ticket = {
-                    'number':'',
-                    'status':''
-                }
-                _ticket['number'] = self._tickets[i]['custom_fields'][24]['value']
-                _ticket['status'] = self._tickets[i]['custom_fields'][25]['value']
-                _tickets.append(_ticket)
+        for case_number in range(self._count):
+            (jira_number, jira_status) = (self._tickets[case_number]['custom_fields'][24]['value'],
+                                          self._tickets[case_number]['custom_fields'][25]['value'])
+            if (isinstance(jira_number, str) and 'Waiting For Customer' in jira_status):
+                jira_ticket = b.jira_ticket
+                jira_ticket['number'] = jira_number
+                jira_ticket['status'] = jira_status
+                _tickets.append(jira_ticket)
         return _tickets
     
     def jira_not_updated(self):
+        #TODO:
+        # Check if ticket was updated lass than 3 days ago
         """ This function is preparing a new list of dict that will
             have details about JIRA tickets(number and status)."""
         jira_tickets = []
-        for i in range(self._count):
-            if isinstance(self._tickets[i]['custom_fields'][24]['value'], str):
-                jira_tickets.append(self._tickets[i]['custom_fields'][24]['value'])
+        for case_number in range(self._count):
+            jira_number = self._tickets[case_number]['custom_fields'][24]['value']
+            if isinstance(jira_number, str):
+                jira_tickets.append(jira_number)
         return jira_tickets
 
     def tickets_per_agent(self):
         """ This function is preparing list with numbers of taken/solved cases by agent."""
-        (_mosinski, _bremesz, _nmagon, _hwozniak, _asito, _wniekrasz, _mbukowian) = (0, 0, 0, 0, 0, 0, 0)
+        (_mosinski, _bremesz, _nmagon, _hwozniak,
+         _asito, _wniekrasz, _mbukowian) = (0, 0, 0, 0, 0, 0, 0)
         agents_list = [
             _mosinski,
             _bremesz,
@@ -142,17 +135,9 @@ class Calculate:
             _wniekrasz,
             _mbukowian
             ]
-        agents_ids = {
-            0: 360561897751,
-            1: 374937979731,
-            2: 360576935392,
-            3: 114101112231,
-            4: 370896464451,
-            5: 372919764412,
-            6: 114126187612
-            }
-        for i in range (self._count):
+        agents_ids = b.agents_ids
+        for case_number in range(self._count):
             for list_id, agent_id in agents_ids.items():
-                if agent_id == self._tickets[i]['assignee_id']:
+                if agent_id == self._tickets[case_number]['assignee_id']:
                     agents_list[list_id] += 1
         return agents_list

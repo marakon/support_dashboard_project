@@ -1,10 +1,10 @@
 #!/usr/bin/python3
+from jira import JIRA
 import requests as r
 import json as j
 import dateutil.parser as du
-from jira import JIRA
-from datetime import datetime as dt, timezone as tz
-
+from datetime import datetime as dt
+from datetime import timezone as tz
 from components.files import views as v
 from components.files import auth as a
 
@@ -89,10 +89,12 @@ class JiraCall:
 
     @property
     def view_jira_details(self):
+        # Function take list and checks if tickets from the list has delta.days > 3
+        # If yes display ticket in the dashboard list
         issue = self._call.issue('ESC-17609')
         now = dt.now(tz.utc)
         time = du.parse(issue.fields.worklog.worklogs[0].updated)
-        print (issue.fields.issuetype.name)
-        print (issue.fields.reporter.displayName)
+        print (issue.fields.issuetype.name) # Needs to be ESC
+        print (issue.fields.reporter.displayName) # One of the agents name and sure name
         delta = now - time
-        print (delta.days)
+        print (delta.days) 
