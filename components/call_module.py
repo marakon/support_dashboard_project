@@ -2,7 +2,7 @@
 from jira import JIRA
 import requests as r
 import json as j
-import dateutil.parser as du
+from dateutil import parser as du
 from datetime import datetime as dt
 from datetime import timezone as tz
 from components.files import views as v
