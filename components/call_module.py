@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 import requests as r
 import json as j
+import dateutil.parser as du
 from jira import JIRA
+from datetime import datetime as dt, timezone as tz
 
 from components.files import views as v
 from components.files import auth as a
@@ -79,11 +81,13 @@ class JiraCall:
 
     def __init__(self):
         self._call = JIRA('https://jira.egnyte-it.com', auth=a.jira_key)
-        pass
-    
+        self._id = None
 
     def view_jira_details(self):
         issue = self._call.issue('ESC-17609')
-        print (issue.fields.project.key)
+        now = dt.now(tz.utc)
+        time = du.parse(issue.fields.worklog.worklogs[0].updated)
         print (issue.fields.issuetype.name)
         print (issue.fields.reporter.displayName)
+        delta = now - time
+        print (delta.days)

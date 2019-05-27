@@ -27,6 +27,10 @@ def team_solved():
     (handle.tickets, handle.ticket_count) = (raw, raw)
     ludzie = handle.tickets_per_agent()
     return ludzie
+
+def jira():
+    call = call_module.JiraCall()
+    return call.view_jira_details()
 #==========================================================================================#
 # Variables
 
@@ -38,7 +42,9 @@ ludzie_taken = team_taken()
 ludzie_solved = team_solved()
 print(ludzie_taken)
 print(ludzie_solved)
-print(unassigned_list)
+
+case = jira()
+print(case)
 
 
 #List of unassigned queue
