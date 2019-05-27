@@ -6,11 +6,11 @@ def unassigned():
     unassigned_call = call_module.ZendeskCall()
     unassigned_handle = handler_module.Calculate()
     unassigned_raw = unassigned_call.unassigned_queue
-    (unassigned_handle.tickets, unassigned_handle.ticketCount,
-    unassigned_handle.platinumCount, unassigned_handle.premiumCount) = (unassigned_raw, unassigned_raw,
+    (unassigned_handle.tickets, unassigned_handle.ticket_count,
+    unassigned_handle.platinum_count, unassigned_handle.premium_count) = (unassigned_raw, unassigned_raw,
                                                                         unassigned_raw, unassigned_raw)
     unassigned_view = unassigned_handle.unassigned_view
-    return unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount, unassigned_view
+    return unassigned_handle.ticket_count, unassigned_handle.platinum_count, unassigned_handle.premium_count, unassigned_view
 
 def team_taken():
     call = call_module.ZendeskCall()
