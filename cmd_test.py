@@ -5,26 +5,28 @@ from components import handler_module
 def unassigned():
     unassigned_call = call_module.ZendeskCall()
     unassigned_handle = handler_module.Calculate()
-    unassigned_raw = unassigned_call.unassignedQueue
-    (unassigned_handle.tickets, unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount) = (unassigned_raw, unassigned_raw, unassigned_raw, unassigned_raw)
-    unassigned_view = unassigned_handle.unassignedView
+    unassigned_raw = unassigned_call.unassigned_queue
+    (unassigned_handle.tickets, unassigned_handle.ticketCount,
+    unassigned_handle.platinumCount, unassigned_handle.premiumCount) = (unassigned_raw, unassigned_raw,
+                                                                        unassigned_raw, unassigned_raw)
+    unassigned_view = unassigned_handle.unassigned_view
     return unassigned_handle.ticketCount, unassigned_handle.platinumCount, unassigned_handle.premiumCount, unassigned_view
 
-def teamSolved():
-    solved_call = call_module.ZendeskCall()
-    solved_handle = handler_module.Calculate()
-    solved_raw = solved_call.teamSolved
-    (solved_handle.tickets, solved_handle.ticketCount) = (solved_raw, solved_raw)
-    ludzie = solved_handle.ticketsPerAgent()
-    return ludzie
-
-def teamTaken():
-    taken_call = call_module.ZendeskCall()
-    taken_handle = handler_module.Calculate()
-    taken_raw = taken_call.teamTaken
-    (taken_handle.tickets, taken_handle.ticketCount) = (taken_raw, taken_raw)
-    lista = taken_handle.ticketsPerAgent()
+def team_taken():
+    call = call_module.ZendeskCall()
+    handle = handler_module.Calculate()
+    raw = call.team_taken
+    (handle.tickets, handle.ticket_count) = (raw, raw)
+    lista = handle.tickets_per_agent()
     return lista
+
+def team_solved():
+    call = call_module.ZendeskCall()
+    handle = handler_module.Calculate()
+    raw = call.team_solved
+    (handle.tickets, handle.ticket_count) = (raw, raw)
+    ludzie = handle.tickets_per_agent()
+    return ludzie
 #==========================================================================================#
 # Variables
 
@@ -32,9 +34,12 @@ def teamTaken():
 
 # Premium and platinum together
 
-ludzie = teamTaken()
+ludzie_taken = team_taken()
+ludzie_solved = team_solved()
+print(ludzie_taken)
+print(ludzie_solved)
+print(unassigned_list)
 
-print(ludzie)
 
 #List of unassigned queue
 

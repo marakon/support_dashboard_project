@@ -19,7 +19,7 @@ class ZendeskCall:
         # Space below to add more views
 
     @property
-    def unassignedQueue(self):
+    def unassigned_queue(self):
         """API call to unassigned queue."""
         resp = r.get(self._unassigned, auth=a.key)
         if resp.status_code != 200:
@@ -28,7 +28,7 @@ class ZendeskCall:
         return j.loads(resp.text)
 
     @property
-    def allViews(self):
+    def all_views(self):
         """API call to get all view in case of implementing new one. Best to send into JsonOperation().dump() function."""
         resp = r.get(self._compact, auth=a.key)
         if resp.status_code != 200:
@@ -37,7 +37,7 @@ class ZendeskCall:
         return j.loads(resp.text)
 
     @property
-    def myOpenTickets(self):
+    def my_open_tickets(self):
         """API call to my open tickets queue."""
         resp = r.get(self._open, auth=a.key)
         if resp.status_code != 200:
@@ -46,7 +46,7 @@ class ZendeskCall:
         return j.loads(resp.text)
 
     @property
-    def poznanTickets(self):
+    def poznan_tickets(self):
         """API call to my open tickets queue."""
         resp = r.get(self._poznan, auth=a.key)
         if resp.status_code != 200:
@@ -57,7 +57,7 @@ class ZendeskCall:
     # If you add new view in __init__ create a new function that will do call with its view.
 
     @property
-    def teamTaken(self):
+    def team_taken(self):
         """API call to my open tickets queue."""
         resp = r.get(self._team_taken, auth=a.key)
         if resp.status_code != 200:
@@ -66,7 +66,7 @@ class ZendeskCall:
         return j.loads(resp.text)
 
     @property
-    def teamSolved(self):
+    def team_solved(self):
         """API call to my open tickets queue."""
         resp = r.get(self._team_solved, auth=a.key)
         if resp.status_code != 200:
@@ -75,11 +75,15 @@ class ZendeskCall:
         return j.loads(resp.text)
 
 
-# class JiraCall:
+class JiraCall:
 
-#     jira = JIRA('https://jira.egnyte-it.com', auth=auth.jira_key)
+    def __init__(self):
+        self._call = JIRA('https://jira.egnyte-it.com', auth=a.jira_key)
+        pass
+    
 
-#     issue = jira.issue('ESC-17609')
-#     print (issue.fields.project.key)
-#     print (issue.fields.issuetype.name)
-#     print (issue.fields.reporter.displayName)
+    def view_jira_details(self):
+        issue = self._call.issue('ESC-17609')
+        print (issue.fields.project.key)
+        print (issue.fields.issuetype.name)
+        print (issue.fields.reporter.displayName)

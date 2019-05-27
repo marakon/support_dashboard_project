@@ -30,7 +30,7 @@ view_team_taken = {
     'title':'Team taken last 12h',
     }
 view_team_solved = {
-    'id':360066781132,
+    'id':360095679811,
     'title':'Team solved last 12h',
     }
 # Add new views below in the same configuration.
