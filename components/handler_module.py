@@ -6,9 +6,9 @@ class Calculate:
         Requires loaded data from 'JsonOpeartion().load()' function.
         This is third called class."""
     def __init__(self):
-        self._tickets = None # List of tickets stored in dict from the response
-        self._views = None # All views in Zendesk
-        self._count = 0 # Amount of tickets(objects in list)
+        self._tickets = None
+        self._views = None
+        self._count = 0
         self._premium = 0
         self._platinum = 0
 
@@ -33,7 +33,7 @@ class Calculate:
     @premiumCount.setter
     def premiumCount(self, loaded):
         for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
+            if self._tickets[i]['custom_fields'][15]['value'] is 'premium':
                 self._premium += 1
     
     @property
@@ -44,7 +44,7 @@ class Calculate:
     @platinumCount.setter
     def platinumCount(self, loaded):
         for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] == 'platinum':
+            if self._tickets[i]['custom_fields'][15]['value'] is 'platinum':
                 self._platinum += 1
     
     @property
@@ -60,7 +60,7 @@ class Calculate:
     @property
     def viewInCMD(self):
         """ This function is viewing the cases in the CMD.
-            Requires data from JsonOparation().load() function."""
+            For testing the code."""
         if self._count == 0:
             print("Queue clear nice!")
         else:
@@ -69,8 +69,8 @@ class Calculate:
                 print(self._tickets[i])
 
     def allViews(self):
-        """ This function is preparing a new list of dict that will have only needed data.
-            Requires data from JsonOparation().load() function."""
+        """ This function is preparing a new list of dict that will have
+            ID, title and if the ticket is active."""
         _views = []
         for i in range(0,self._count):
             _view = {
@@ -84,10 +84,9 @@ class Calculate:
             _views.append(_view)
         return _views
         
-    @property
     def unassignedView(self):
-        """ This function is preparing a new list of dict that will have only needed data.
-            Requires data from JsonOparation().load() function."""
+        """ This function is preparing a new list of dict that will have:
+            ID, subject, domain_name, plan, priority, created date."""
         _tickets = []
         for i in range(0,self._count):
             _ticket = {
@@ -108,12 +107,14 @@ class Calculate:
         return _tickets
 
     def jiraStatusView(self):
-        """ This function is preparing a new list of dict that will have only needed data.
-            Requires data from JsonOparation().load() function."""
+        """ This function is preparing a new list of dict that will
+            have details about JIRA tickets(number and status)."""
         _tickets = []
         print(self._count)
         for i in range(self._count):
-            if isinstance(self._tickets[i]['custom_fields'][24]['value'], str) and 'Waiting For Customer' in self._tickets[i]['custom_fields'][25]['value']:
+            if (isinstance(self._tickets[i]['custom_fields'][24]['value'], str) and
+            'Waiting For Customer' in self._tickets[i]['custom_fields'][25]['value']):
+            # Field needs to be str and Waiting For Customers state
                 _ticket = {
                     'number':'',
                     'status':''
@@ -123,33 +124,22 @@ class Calculate:
                 _tickets.append(_ticket)
         return _tickets
 
-
     def ticketsPerAgent(self):
-        """ This function is preparing a new list of dict that will have only needed data.
-            Requires data from JsonOparation().load() function."""
+        """ This function is preparing list with numbers of taken/solved cases by agent."""
         (_mO, _bR, _nM, _hW, _aS, _wN, _mB) = (0, 0, 0, 0, 0, 0, 0)
-        print(self._count)
-        for i in range(self._count):
-            if self._tickets[i]['assignee_id'] == 374937979731:
-                _bR += 1
-            if self._tickets[i]['assignee_id'] == 360576935392:
-                _nM += 1
-            if self._tickets[i]['assignee_id'] == 360561897751:
-                _mO += 1
-            if self._tickets[i]['assignee_id'] == 114101112231:
-                _hW += 1
-            if self._tickets[i]['assignee_id'] == 370896464451:
-                _aS += 1
-            if self._tickets[i]['assignee_id'] == 372919764412:
-                _wN += 1
-            if self._tickets[i]['assignee_id'] == 114126187612:
-                _mB += 1
-        return _bR, _nM, _mO, _hW, _aS, _wN, _mB
-# 'assignee_id'
-# Bremesz = 374937979731
-# Natalia = 360576935392
-# MatO = 360561897751
-# Hubert = 114101112231
-# Ania = 370896464451
-# Wojciech = 372919764412
-# MatB = 114126187612
+        agents_list = [_mO, _bR, _nM, _hW, _aS, _wN, _mB]
+        agents_dict = {
+            0: 360561897751,
+            1: 374937979731,
+            2: 360576935392,
+            3: 114101112231,
+            4: 370896464451,
+            5: 372919764412,
+            6: 114126187612
+        }
+        for i in range (self._count):
+            if self._tickets[i]['assignee_id'] in agents_dict.values():
+                for list_id, agent_id in agents_dict.items():
+                    if agent_id == self._tickets[i]['assignee_id']:
+                        agents_list[list_id] += 1
+        return agents_list
