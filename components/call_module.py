@@ -27,7 +27,8 @@ class ZendeskCall:
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return j.loads(resp.text)
+        else:
+            return j.loads(resp.text)
 
     @property
     def all_views(self):
@@ -36,7 +37,8 @@ class ZendeskCall:
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return j.loads(resp.text)
+        else:
+            return j.loads(resp.text)
 
     @property
     def my_open_tickets(self):
@@ -45,7 +47,8 @@ class ZendeskCall:
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return j.loads(resp.text)
+        else:
+            return j.loads(resp.text)
 
     @property
     def poznan_tickets(self):
@@ -54,9 +57,8 @@ class ZendeskCall:
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return j.loads(resp.text)
-    
-    # If you add new view in __init__ create a new function that will do call with its view.
+        else:
+            return j.loads(resp.text)
 
     @property
     def team_taken(self):
@@ -65,7 +67,8 @@ class ZendeskCall:
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return j.loads(resp.text)
+        else:
+            return j.loads(resp.text)
 
     @property
     def team_solved(self):
@@ -74,7 +77,8 @@ class ZendeskCall:
         if resp.status_code != 200:
             print('Status:', resp.status_code, 'Problem with the request. Exiting.')
             exit()
-        return j.loads(resp.text)
+        else:
+            return j.loads(resp.text)
 
 
 class JiraCall:
@@ -83,6 +87,7 @@ class JiraCall:
         self._call = JIRA('https://jira.egnyte-it.com', auth=a.jira_key)
         self._id = None
 
+    @property
     def view_jira_details(self):
         issue = self._call.issue('ESC-17609')
         now = dt.now(tz.utc)

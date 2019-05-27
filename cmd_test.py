@@ -30,7 +30,7 @@ def team_solved():
 
 def jira():
     call = call_module.JiraCall()
-    return call.view_jira_details()
+    return call.view_jira_details
 #==========================================================================================#
 # Variables
 
