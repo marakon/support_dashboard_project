@@ -21,6 +21,6 @@ function unassignedPremium(count) {
 
 eel.expose(unassignedList);
 function unassignedList(list) {
-    typeof(list);
-    console.log(list);
+    var ticketList = list;
+    console.log(ticketList);
 }

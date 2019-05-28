@@ -42,6 +42,7 @@ def test_request():
     eel.unassignedCount(un_ticketCount)
     eel.unassignedPlatinum(un_platinum)
     eel.unassignedPremium(un_premium)
+    eel.unassignedList(unassigned_list)
 
 
 # Tickets taken last 12h per agent
