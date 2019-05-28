@@ -3,3 +3,4 @@ auth.py
 *.code-workspace
 __pycache__
 *.pyc
+.idea
