@@ -18,3 +18,9 @@ eel.expose(unassignedPremium);
 function unassignedPremium(count) {
     document.getElementById("count_premium").innerHTML = count;
 }
+
+eel.expose(unassignedList);
+function unassignedList(list) {
+    typeof(list);
+    console.log(list);
+}
