@@ -35,10 +35,15 @@ def team_solved():
 #==========================================================================================#
 # Variables
 
+
 @eel.expose
 def test_request():
     (un_ticketCount, un_platinum, un_premium, unassigned_list) = unassigned()
-    return un_ticketCount
+    eel.unassignedCount(un_ticketCount)
+    eel.unassignedPlatinum(un_platinum)
+    eel.unassignedPremium(un_premium)
+    print(un_premium)
+
 
 # Tickets taken last 12h per agent
 ludzie = team_taken()
@@ -54,6 +59,5 @@ ludzie = team_solved()
 # @eel.expose
 # def ticket_count():
 #     return un_ticketCount
-
 
 eel.start("index.html", size=(1280, 720))
