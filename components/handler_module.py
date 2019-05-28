@@ -86,7 +86,14 @@ class Calculate:
             ID, subject, domain_name, plan, priority, created date."""
         _tickets = []
         for case_number in range(self._count):
-            _ticket = b.unassigned_ticket
+            _ticket = {
+                'id': '',
+                'subject':'',
+                'domain_name':'',
+                'plan':'',
+                'priority':'',
+                'created_at':''
+                }
             _ticket['id'] = self._tickets[case_number]['id']
             _ticket['subject'] = self._tickets[case_number]['subject']
             _ticket['domain_name'] = self._tickets[case_number]['custom_fields'][5]['value']
