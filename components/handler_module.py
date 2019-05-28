@@ -32,8 +32,7 @@ class Calculate:
     @premium_count.setter
     def premium_count(self, loaded):
         for i in range(0, self._count):
-            plan_type = self._tickets[i]['custom_fields'][15]['value']
-            if plan_type is 'premium':
+            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
                 self._premium += 1
     
     @property
@@ -44,8 +43,7 @@ class Calculate:
     @platinum_count.setter
     def platinum_count(self, loaded):
         for i in range(0, self._count):
-            plan_type = self._tickets[i]['custom_fields'][15]['value']
-            if plan_type is 'platinum':
+            if self._tickets[i]['custom_fields'][15]['value'] == 'platinum':
                 self._platinum += 1
     
     @property
