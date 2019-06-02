@@ -22,5 +22,29 @@ function unassignedPremium(count) {
 eel.expose(unassignedList);
 function unassignedList(list) {
     var ticketList = list;
-    console.log(ticketList[0].id);
+
+    var getDiv = document.getElementById('queueList');
+
+    while(getDiv.hasChildNodes()) {
+        getDiv.removeChild(getDiv.firstChild);
+    }
+
+    var numberOfListItems = ticketList.length;
+
+    for(var i = 0; i < numberOfListItems; i++) {
+        var objToArr = Object.values(ticketList[i]);
+
+        var listElement = document.createElement('ul');
+
+        document.getElementById('queueList').appendChild(listElement);
+
+        for(var n = 0; n < objToArr.length; n++){
+            var listItem = document.createElement('li');
+
+            listItem.innerHTML = objToArr[n];
+
+            listElement.appendChild(listItem);
+        }
+
+    }
 }
