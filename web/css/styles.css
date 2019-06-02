@@ -2,3 +2,25 @@
     font-size: 70px;
     text-align: center;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.ticket-list {
+    text-align: center;
+}
+
+.ticket-list {
+    font-size: 20px;
+}
