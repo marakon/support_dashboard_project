@@ -34,7 +34,7 @@ class Calculate:
         for i in range(0, self._count):
             if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
                 self._premium += 1
-    
+
     @property
     def platinum_count(self):
         """Returns platinum count of the given view."""
@@ -45,7 +45,7 @@ class Calculate:
         for i in range(0, self._count):
             if self._tickets[i]['custom_fields'][15]['value'] == 'platinum':
                 self._platinum += 1
-    
+
     @property
     def ticket_count(self):
         """Returns tickets count of the given view."""
@@ -114,7 +114,7 @@ class Calculate:
                 jira_ticket['status'] = jira_status
                 _tickets.append(jira_ticket)
         return _tickets
-    
+
     def jira_not_updated(self):
         #TODO:
         # Check if ticket was updated lass than 3 days ago
