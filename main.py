@@ -50,7 +50,12 @@ def team_solved():
 @eel.expose
 def test_request():
     (un_ticketCount, un_platinum, un_premium, un_transfer, unassigned_list) = unassigned()
+    taken_list = team_taken()
+    solved_tickets = team_solved()
     (na_view, na_count) = not_answered()
+    
+    print(taken_list)
+    print(solved_tickets)
     eel.unassignedCount(un_ticketCount)
     eel.unassignedPlatinum(un_platinum)
     eel.unassignedPremium(un_premium)
@@ -73,4 +78,4 @@ ludzie = team_solved()
 # def ticket_count():
 #     return un_ticketCount
 
-eel.start("index.html", size=(1280, 720))
+eel.start("index.html", size=(1920, 1080))

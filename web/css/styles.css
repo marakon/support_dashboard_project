@@ -61,10 +61,19 @@ td {
     width: 100%;
     height: 20%;
     z-index: 10;
-    background-color: rgba(0,0,0,0.2); /*dim the background*/
+    background-color: rgba(0,0,0, 0.3); /*dim the background*/
 }
 
 .big {
     height: 10%;
 }
 
+.pickup-table {
+    font-size: 20px;
+}
+
+.td-stats {
+    padding: 12px;
+    padding-left: 30px;
+    text-align: center;
+}

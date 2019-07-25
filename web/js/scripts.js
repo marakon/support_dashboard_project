@@ -27,7 +27,6 @@ function unassignedTransfer(count) {
 eel.expose(unassignedList);
 function unassignedList(list) {
     var ticketList = list;
-    console.log(ticketList)
 
     var getTable = document.getElementById('ticket-table-list');
 
@@ -38,6 +37,10 @@ function unassignedList(list) {
     var numberOfListItems = ticketList.length;
 
     for(var i = 0; i < numberOfListItems; i++) {
+        if (i === 7) {
+            break;
+        }
+
         var trElement = document.createElement('tr');
 
         document.getElementById('ticket-table-list').appendChild(trElement);
@@ -49,7 +52,6 @@ function unassignedList(list) {
 
             trElement.appendChild(tdItem);
         }
-
     }
 }
 
@@ -66,6 +68,10 @@ function notAnsweredList(list) {
     var numberOfListItems = ticketList.length;
 
     for(var i = 0; i < numberOfListItems; i++) {
+        if (i === 7) {
+            break;
+        }
+
         var trElement = document.createElement('tr');
 
         document.getElementById('na-ticket-table-list').appendChild(trElement);
@@ -77,6 +83,5 @@ function notAnsweredList(list) {
 
             trElement.appendChild(tdItem);
         }
-
     }
 }
