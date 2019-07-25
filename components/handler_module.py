@@ -1,6 +1,10 @@
 #!/usr/bin/python3
-import datetime
+from datetime import date
+from datetime import time
+from datetime import datetime
+from datetime import timedelta
 from components.files import blueprints as b
+import re
 
 class Calculate:
     """ This class is processing data about tickets."""
@@ -88,7 +92,7 @@ class Calculate:
             _ticket.append(self._tickets[case_number]['id'])
             _ticket.append(self._tickets[case_number]['custom_fields'][5]['value'])
             _ticket.append(self._tickets[case_number]['custom_fields'][15]['value'])
-            _ticket.append(self._tickets[case_number]['created_at'])
+            _ticket.append(self.calculate_delta_time(case_number))
             _tickets.append(_ticket)
         return _tickets
 
@@ -138,8 +142,15 @@ class Calculate:
                     agents_list[list_id] += 1
         return agents_list
 
-    
-
     def calculate_delta_time(self, case_number):
-        pass
-
+        created_time = datetime.strptime(self._tickets[case_number]['created_at'], '%Y-%m-%dT%H:%M:%SZ').time()
+        now = datetime.time(datetime.utcnow().replace(microsecond=0))
+        difference_delta = timedelta(hours=now.hour,
+                                     minutes=now.minute,
+                                     seconds=now.second)\
+                         - timedelta(hours=created_time.hour,
+                                     minutes=created_time.minute,
+                                     seconds=created_time.second)
+        alert = str(difference_delta.seconds//60%60) + ' minutes ago'
+        return alert
+        
