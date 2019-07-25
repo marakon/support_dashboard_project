@@ -82,19 +82,19 @@ class ZendeskCall:
             return j.loads(resp.text)
 
 
-class JiraCall:
+# class JiraCall:
 
-    def __init__(self):
-        self._call = JIRA('https://jira.egnyte-it.com', auth=a.jira_key)
+#     def __init__(self):
+#         self._call = JIRA('https://jira.egnyte-it.com', auth=a.jira_key)
 
-    @property
-    def view_jira_details(self):
-        # Function take list and checks if tickets from the list has delta.days > 3
-        # If yes display ticket in the dashboard list
-        issue = self._call.issue('ESC-17609')
-        now = dt.now(tz.utc)
-        time = du.parse(issue.fields.worklog.worklogs[0].updated)
-        print (issue.fields.issuetype.name) # Needs to be ESC
-        print (issue.fields.reporter.displayName) # One of the agents name and sure name
-        delta = now - time
-        print (delta.days) 
+#     @property
+#     def view_jira_details(self):
+#         # Function take list and checks if tickets from the list has delta.days > 3
+#         # If yes display ticket in the dashboard list
+#         issue = self._call.issue('ESC-17609')
+#         now = dt.now(tz.utc)
+#         time = du.parse(issue.fields.worklog.worklogs[0].updated)
+#         print (issue.fields.issuetype.name) # Needs to be ESC
+#         print (issue.fields.reporter.displayName) # One of the agents name and sure name
+#         delta = now - time
+#         print (delta.days) 

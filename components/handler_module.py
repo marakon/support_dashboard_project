@@ -14,6 +14,7 @@ class Calculate:
         self._count = 0
         self._premium = 0
         self._platinum = 0
+        self._transfer = 0
 
 #======================SETTERS====================GETTERS===================#
 
@@ -58,6 +59,16 @@ class Calculate:
     @ticket_count.setter
     def ticket_count(self, loaded):
         self._count = loaded['count']
+    
+    @property
+    def transfer_count(self):
+        return self._transfer
+
+    @transfer_count.setter 
+    def  transfer_count(self, loaded):
+        for i in range(0, self._count):
+            if self._tickets[i]['group_id'] == 360002974692:
+                self._transfer += 1
 
 #===========================================================================#
     @property
