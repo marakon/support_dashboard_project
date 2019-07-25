@@ -115,7 +115,7 @@ class Calculate:
             _ticket = []
             _ticket.append(self._tickets[case_number]['id'])
             _ticket.append(self.name_check(self._tickets[case_number]['custom_fields'][5]['value']))
-            _ticket.append(self.assignee())
+            _ticket.append(self.assignee(case_number))
             _tickets.append(_ticket)
         return _tickets
 
@@ -183,17 +183,16 @@ class Calculate:
             item = item[:comma]
         return item
     
-    def assignee(self):
+    def assignee(self, case_number):
         agents_list = [
-            "MateuszO",
-            "BartoszR",
-            "HarshG",
-            "WojciechN",
-            "JakubB"
+            "Mateusz",
+            "Bartosz",
+            "Harsh",
+            "Wojciech",
+            "Jakub"
             ]
         agents_ids = b.agents_ids
-        for case_number in range(self._count):
-            for list_id, agent_id in agents_ids.items():
-                if agent_id == self._tickets[case_number]['assignee_id']:
-                    agent = agents_list[list_id]
+        for list_id, agent_id in agents_ids.items():
+            if agent_id == self._tickets[case_number]['assignee_id']:
+                agent = agents_list[list_id]
         return agent
