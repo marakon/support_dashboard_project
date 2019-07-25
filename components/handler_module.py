@@ -114,10 +114,9 @@ class Calculate:
         for case_number in range(self._count):
             _ticket = []
             _ticket.append(self._tickets[case_number]['id'])
-            _ticket.append(self.is_null(self._tickets[case_number]['custom_fields'][5]['value']))
-            _ticket.append(self.assignee(case_number))
+            _ticket.append(self.name_check(self._tickets[case_number]['custom_fields'][5]['value']))
+            _ticket.append(self.assignee())
             _tickets.append(_ticket)
-        print(_tickets)
         return _tickets
 
     def jira_status_view(self):
@@ -176,18 +175,21 @@ class Calculate:
         alert = str(difference_delta.seconds//60%60) + ' min ago'
         return alert
         
-    def is_null(self, item):
+    def name_check(self, item):
         if item == None:
             item = 'Not defined'
+        if ',' in item:
+            comma = item.find(',')
+            item = item[:comma]
         return item
     
-    def assignee(self, case_number):
+    def assignee(self):
         agents_list = [
-            "_mosinski",
-            "_bremesz",
-            "_hgautam",
-            "_wniekrasz",
-            "_jburda"
+            "MateuszO",
+            "BartoszR",
+            "HarshG",
+            "WojciechN",
+            "JakubB"
             ]
         agents_ids = b.agents_ids
         for case_number in range(self._count):
