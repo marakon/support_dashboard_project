@@ -101,8 +101,8 @@ class Calculate:
         for case_number in range(self._count):
             _ticket = []
             _ticket.append(self._tickets[case_number]['id'])
-            _ticket.append(self._tickets[case_number]['custom_fields'][5]['value'])
-            _ticket.append(self._tickets[case_number]['custom_fields'][15]['value'])
+            _ticket.append(self.is_null(self._tickets[case_number]['custom_fields'][5]['value']))
+            _ticket.append(self.is_null(self._tickets[case_number]['custom_fields'][15]['value']))
             _ticket.append(self.calculate_delta_time(case_number))
             _tickets.append(_ticket)
         return _tickets
@@ -135,16 +135,14 @@ class Calculate:
 
     def tickets_per_agent(self):
         """ This function is preparing list with numbers of taken/solved cases by agent."""
-        (_mosinski, _bremesz, _nmagon, _hwozniak,
-         _asito, _wniekrasz, _mbukowian) = (0, 0, 0, 0, 0, 0, 0)
+        (_mosinski, _bremesz, _hgautam,
+         _wniekrasz, _jburda) = (0, 0, 0, 0, 0)
         agents_list = [
             _mosinski,
             _bremesz,
-            _nmagon,
-            _hwozniak,
-            _asito,
+            _hgautam,
             _wniekrasz,
-            _mbukowian
+            _jburda
             ]
         agents_ids = b.agents_ids
         for case_number in range(self._count):
@@ -165,3 +163,7 @@ class Calculate:
         alert = str(difference_delta.seconds//60%60) + ' minutes ago'
         return alert
         
+    def is_null(self, item):
+        if item == None:
+            item = 'Not defined'
+        return item
