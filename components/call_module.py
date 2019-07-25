@@ -2,6 +2,7 @@
 from jira import JIRA
 import requests as r
 import json as j
+import components.handler_module as hm
 from dateutil import parser as du
 from datetime import datetime as dt
 from datetime import timezone as tz
@@ -85,7 +86,6 @@ class JiraCall:
 
     def __init__(self):
         self._call = JIRA('https://jira.egnyte-it.com', auth=a.jira_key)
-        self._id = None
 
     @property
     def view_jira_details(self):

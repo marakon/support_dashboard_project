@@ -34,7 +34,7 @@ class Calculate:
         for i in range(0, self._count):
             if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
                 self._premium += 1
-    
+
     @property
     def platinum_count(self):
         """Returns platinum count of the given view."""
@@ -45,7 +45,7 @@ class Calculate:
         for i in range(0, self._count):
             if self._tickets[i]['custom_fields'][15]['value'] == 'platinum':
                 self._platinum += 1
-    
+
     @property
     def ticket_count(self):
         """Returns tickets count of the given view."""
@@ -81,23 +81,14 @@ class Calculate:
         
     def unassigned_view(self):
         """ This function is preparing a new list of dict that will have:
-            ID, subject, domain_name, plan, priority, created date."""
+            ID, domain_name, plan, created date."""
         _tickets = []
         for case_number in range(self._count):
-            _ticket = {
-                'id': '',
-                'subject':'',
-                'domain_name':'',
-                'plan':'',
-                'priority':'',
-                'created_at':''
-                }
-            _ticket['id'] = self._tickets[case_number]['id']
-            _ticket['subject'] = self._tickets[case_number]['subject']
-            _ticket['domain_name'] = self._tickets[case_number]['custom_fields'][5]['value']
-            _ticket['plan'] = self._tickets[case_number]['custom_fields'][15]['value']
-            _ticket['priority'] = self._tickets[case_number]['priority']
-            _ticket['created_at'] = self._tickets[case_number]['created_at']
+            _ticket = []
+            _ticket.append(self._tickets[case_number]['id'])
+            _ticket.append(self._tickets[case_number]['custom_fields'][5]['value'])
+            _ticket.append(self._tickets[case_number]['custom_fields'][15]['value'])
+            _ticket.append(self._tickets[case_number]['created_at'])
             _tickets.append(_ticket)
         return _tickets
 
@@ -114,7 +105,7 @@ class Calculate:
                 jira_ticket['status'] = jira_status
                 _tickets.append(jira_ticket)
         return _tickets
-    
+
     def jira_not_updated(self):
         #TODO:
         # Check if ticket was updated lass than 3 days ago
@@ -146,3 +137,9 @@ class Calculate:
                 if agent_id == self._tickets[case_number]['assignee_id']:
                     agents_list[list_id] += 1
         return agents_list
+
+    
+
+    def calculate_delta_time(self, case_number):
+        pass
+
