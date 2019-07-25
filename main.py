@@ -14,7 +14,7 @@ def unassigned():
     unassigned_handle.platinum_count, unassigned_handle.premium_count, unassigned_handle.transfer_count) = (unassigned_raw, unassigned_raw, \
                                                                         unassigned_raw, unassigned_raw, unassigned_raw)
     unassigned_view = unassigned_handle.unassigned_view()
-    return unassigned_handle.ticket_count, unassigned_handle.platinum_count, unassigned_handle.premium_count, unassigned_view, unassigned_handle.transfer_count
+    return unassigned_handle.ticket_count, unassigned_handle.platinum_count, unassigned_handle.premium_count, unassigned_handle.transfer_count, unassigned_view
 
 def team_taken():
     call = call_module.ZendeskCall()
