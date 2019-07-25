@@ -27,6 +27,7 @@ function unassignedTransfer(count) {
 eel.expose(unassignedList);
 function unassignedList(list) {
     var ticketList = list;
+    console.log(ticketList)
 
     var getDiv = document.getElementById('queueList');
 
