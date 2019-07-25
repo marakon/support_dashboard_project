@@ -29,27 +29,25 @@ function unassignedList(list) {
     var ticketList = list;
     console.log(ticketList)
 
-    var getDiv = document.getElementById('queueList');
+    var getTable = document.getElementById('ticket-table-list');
 
-    while(getDiv.hasChildNodes()) {
-        getDiv.removeChild(getDiv.firstChild);
+    while(getTable.hasChildNodes()) {
+        getTable.removeChild(getTable.firstChild);
     }
 
     var numberOfListItems = ticketList.length;
 
     for(var i = 0; i < numberOfListItems; i++) {
-        var objToArr = Object.values(ticketList[i]);
+        var trElement = document.createElement('tr');
 
-        var listElement = document.createElement('ul');
+        document.getElementById('ticket-table-list').appendChild(trElement);
 
-        document.getElementById('queueList').appendChild(listElement);
+        for(var n = 0; n < ticketList[i].length; n++){
+            var tdItem = document.createElement('td');
 
-        for(var n = 0; n < objToArr.length; n++){
-            var listItem = document.createElement('li');
+            tdItem.innerHTML = ticketList[i][n];
 
-            listItem.innerHTML = objToArr[n];
-
-            listElement.appendChild(listItem);
+            trElement.appendChild(tdItem);
         }
 
     }
