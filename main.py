@@ -11,10 +11,19 @@ def unassigned():
     unassigned_handle = handler_module.Calculate()
     unassigned_raw = unassigned_call.unassigned_queue
     (unassigned_handle.tickets, unassigned_handle.ticket_count, \
-    unassigned_handle.platinum_count, unassigned_handle.premium_count, unassigned_handle.transfer_count) = (unassigned_raw, unassigned_raw, \
-                                                                        unassigned_raw, unassigned_raw, unassigned_raw)
+    unassigned_handle.platinum_count, unassigned_handle.premium_count, \
+    unassigned_handle.transfer_count) = (unassigned_raw, unassigned_raw, \
+                                         unassigned_raw, unassigned_raw, unassigned_raw)
     unassigned_view = unassigned_handle.unassigned_view()
     return unassigned_handle.ticket_count, unassigned_handle.platinum_count, unassigned_handle.premium_count, unassigned_handle.transfer_count, unassigned_view
+
+def not_answered():
+    not_answered_call = call_module.ZendeskCall()
+    not_answered_handle = handler_module.Calculate()
+    not_answered_raw = not_answered_call.not_answered
+    not_answered_handle.tickets = not_answered_raw
+    not_answered_view = not_answered_handle.not_answered_view()
+    return not_answered_view
 
 def team_taken():
     call = call_module.ZendeskCall()
@@ -39,12 +48,13 @@ def team_solved():
 @eel.expose
 def test_request():
     (un_ticketCount, un_platinum, un_premium, un_transfer, unassigned_list) = unassigned()
+    na_view = not_answered()
     eel.unassignedCount(un_ticketCount)
     eel.unassignedPlatinum(un_platinum)
     eel.unassignedPremium(un_premium)
     eel.unassignedTransfer(un_transfer)
     eel.unassignedList(unassigned_list)
-
+    eel.notAnsweredList(na_view)
 
 # Tickets taken last 12h per agent
 ludzie = team_taken()

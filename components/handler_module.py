@@ -107,6 +107,19 @@ class Calculate:
             _tickets.append(_ticket)
         return _tickets
 
+    def not_answered_view(self):
+        """ This function is preparing a new list of dict that will have:
+            ID, domain_name, plan, created date."""
+        _tickets = []
+        for case_number in range(self._count):
+            _ticket = []
+            _ticket.append(self._tickets[case_number]['id'])
+            _ticket.append(self.is_null(self._tickets[case_number]['custom_fields'][5]['value']))
+            _ticket.append(self.assignee(case_number))
+            _tickets.append(_ticket)
+        print(_tickets)
+        return _tickets
+
     def jira_status_view(self):
         """ This function is preparing a new list of dict that will
             have details about JIRA tickets(number and status)."""
@@ -160,10 +173,25 @@ class Calculate:
                          - timedelta(hours=created_time.hour,
                                      minutes=created_time.minute,
                                      seconds=created_time.second)
-        alert = str(difference_delta.seconds//60%60) + ' minutes ago'
+        alert = str(difference_delta.seconds//60%60) + ' min ago'
         return alert
         
     def is_null(self, item):
         if item == None:
             item = 'Not defined'
         return item
+    
+    def assignee(self, case_number):
+        agents_list = [
+            "_mosinski",
+            "_bremesz",
+            "_hgautam",
+            "_wniekrasz",
+            "_jburda"
+            ]
+        agents_ids = b.agents_ids
+        for case_number in range(self._count):
+            for list_id, agent_id in agents_ids.items():
+                if agent_id == self._tickets[case_number]['assignee_id']:
+                    agent = agents_list[list_id]
+        return agent
