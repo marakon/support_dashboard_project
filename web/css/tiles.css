@@ -20,7 +20,7 @@ body {
 .item {
     background-color: rgb(38, 45, 71);
     color: rgb(231, 231, 231);
-    border-radius: px;
+    border-radius: 20px;
     font-size: 20px;
     padding: 20px;
 }

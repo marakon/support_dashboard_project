@@ -24,6 +24,15 @@ function unassignedTransfer(count) {
     document.getElementById("count_transfer").innerHTML = count;
 }
 
+eel.expose(pickupRate);
+function pickupRate(count) {
+    document.getElementById("mat_pickup").innerHTML = count[0];
+    document.getElementById("bart_pickup").innerHTML = count[1];
+    document.getElementById("harsh_pickup").innerHTML = count[2];
+    document.getElementById("woj_pickup").innerHTML = count[3];
+    document.getElementById("jak_pickup").innerHTML = count[4];
+}
+
 eel.expose(unassignedList);
 function unassignedList(list) {
     var ticketList = list;
@@ -68,7 +77,7 @@ function notAnsweredList(list) {
     var numberOfListItems = ticketList.length;
 
     for(var i = 0; i < numberOfListItems; i++) {
-        if (i === 7) {
+        if (i === 12) {
             break;
         }
 
@@ -78,6 +87,7 @@ function notAnsweredList(list) {
 
         for(var n = 0; n < ticketList[i].length; n++){
             var tdItem = document.createElement('td');
+            tdItem.className = "td-na";
 
             tdItem.innerHTML = ticketList[i][n];
 
@@ -85,3 +95,4 @@ function notAnsweredList(list) {
         }
     }
 }
+
