@@ -21,13 +21,12 @@ function unassignedPremium(count) {
 
 eel.expose(unassignedTransfer);
 function unassignedTransfer(count) {
-    document.getElementById("count_premium").innerHTML = count;
+    document.getElementById("count_transfer").innerHTML = count;
 }
 
 eel.expose(unassignedList);
 function unassignedList(list) {
     var ticketList = list;
-    console.log(ticketList)
 
     var getDiv = document.getElementById('queueList');
 
