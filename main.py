@@ -21,9 +21,9 @@ def not_answered():
     not_answered_call = call_module.ZendeskCall()
     not_answered_handle = handler_module.Calculate()
     not_answered_raw = not_answered_call.not_answered
-    not_answered_handle.tickets = not_answered_raw
+    (not_answered_handle.tickets, not_answered_handle.ticket_count) = (not_answered_raw, not_answered_raw)
     not_answered_view = not_answered_handle.not_answered_view()
-    return not_answered_view
+    return not_answered_view, not_answered_handle.ticket_count
 
 def team_taken():
     call = call_module.ZendeskCall()
@@ -48,7 +48,7 @@ def team_solved():
 @eel.expose
 def test_request():
     (un_ticketCount, un_platinum, un_premium, un_transfer, unassigned_list) = unassigned()
-    na_view = not_answered()
+    (na_view, na_count) = not_answered()
     eel.unassignedCount(un_ticketCount)
     eel.unassignedPlatinum(un_platinum)
     eel.unassignedPremium(un_premium)
