@@ -37,7 +37,7 @@ class Calculate:
     @premium_count.setter
     def premium_count(self, loaded):
         for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] == 'premium':
+            if self.support_plan(i) == 'premium':
                 self._premium += 1
 
     @property
@@ -48,7 +48,7 @@ class Calculate:
     @platinum_count.setter
     def platinum_count(self, loaded):
         for i in range(0, self._count):
-            if self._tickets[i]['custom_fields'][15]['value'] == 'platinum':
+            if self.support_plan(i) == 'platinum':
                 self._platinum += 1
 
     @property
@@ -67,7 +67,7 @@ class Calculate:
     @transfer_count.setter 
     def  transfer_count(self, loaded):
         for i in range(0, self._count):
-            if self._tickets[i]['group_id'] == 360002974692:
+            if self.group_id(i) == 360002974692:
                 self._transfer += 1
 
 #===========================================================================#
@@ -100,9 +100,9 @@ class Calculate:
         _tickets = []
         for case_number in range(self._count):
             _ticket = []
-            _ticket.append(self._tickets[case_number]['id'])
-            _ticket.append(self.name_check(self._tickets[case_number]['custom_fields'][5]['value']))
-            _ticket.append(self.name_check(self._tickets[case_number]['custom_fields'][15]['value']))
+            _ticket.append(self.ticket_id(case_number))
+            _ticket.append(self.name_check(self.domain_name(case_number)))
+            _ticket.append(self.name_check(self.support_plan(case_number)))
             _ticket.append(self.calculate_delta_time(case_number))
             _tickets.append(_ticket)
         return _tickets
@@ -113,8 +113,8 @@ class Calculate:
         _tickets = []
         for case_number in range(self._count):
             _ticket = []
-            _ticket.append(self._tickets[case_number]['id'])
-            _ticket.append(self.name_check(self._tickets[case_number]['custom_fields'][5]['value']))
+            _ticket.append(self.ticket_id(case_number))
+            _ticket.append(self.name_check(self.domain_name(case_number)))
             _ticket.append(self.assignee(case_number))
             _tickets.append(_ticket)
         return _tickets
@@ -124,8 +124,8 @@ class Calculate:
             have details about JIRA tickets(number and status)."""
         _tickets = []
         for case_number in range(self._count):
-            (jira_number, jira_status) = (self._tickets[case_number]['custom_fields'][24]['value'],
-                                          self._tickets[case_number]['custom_fields'][25]['value'])
+            (jira_number, jira_status) = (self.jira_id(case_number),
+                                          self.jira_stat(case_number))
             if (isinstance(jira_number, str) and 'Waiting For Customer' in jira_status):
                 jira_ticket = b.jira_ticket
                 jira_ticket['number'] = jira_number
@@ -140,7 +140,7 @@ class Calculate:
             have details about JIRA tickets(number and status)."""
         jira_tickets = []
         for case_number in range(self._count):
-            jira_number = self._tickets[case_number]['custom_fields'][24]['value']
+            jira_number = self.jira_id(case_number)
             if isinstance(jira_number, str):
                 jira_tickets.append(jira_number)
         return jira_tickets
@@ -150,21 +150,21 @@ class Calculate:
         (_mosinski, _bremesz, _hgautam,
          _wniekrasz, _jburda) = (0, 0, 0, 0, 0)
         agents_list = [
-            _mosinski,
-            _bremesz,
-            _hgautam,
-            _wniekrasz,
-            _jburda
+            _mosinski,     #0
+            _bremesz,      #1
+            _hgautam,      #2
+            _wniekrasz,    #3
+            _jburda        #4
             ]
         agents_ids = b.agents_ids
         for case_number in range(self._count):
             for list_id, agent_id in agents_ids.items():
-                if agent_id == self._tickets[case_number]['assignee_id']:
+                if agent_id == self.assignee_id(case_number):
                     agents_list[list_id] += 1
         return agents_list
 
     def calculate_delta_time(self, case_number):
-        created_time = datetime.strptime(self._tickets[case_number]['created_at'], '%Y-%m-%dT%H:%M:%SZ').time()
+        created_time = datetime.strptime(self.created_at(case_number), '%Y-%m-%dT%H:%M:%SZ').time()
         now = datetime.time(datetime.utcnow().replace(microsecond=0))
         difference_delta = timedelta(hours=now.hour,
                                      minutes=now.minute,
@@ -193,6 +193,30 @@ class Calculate:
             ]
         agents_ids = b.agents_ids
         for list_id, agent_id in agents_ids.items():
-            if agent_id == self._tickets[case_number]['assignee_id']:
+            if agent_id == self.assignee_id(case_number):
                 agent = agents_list[list_id]
         return agent
+
+    def created_at(self, case_number):
+        return self._tickets[case_number]['created_at']
+    
+    def assignee_id(self, case_number):
+        return self._tickets[case_number]['assignee_id']
+
+    def domain_name(self, case_number):
+        return self._tickets[case_number]['custom_fields'][5]['value']
+    
+    def support_plan(self, case_number):
+        return self._tickets[case_number]['custom_fields'][15]['value']
+    
+    def ticket_id(self, case_number):
+        return self._tickets[case_number]['id']
+    
+    def group_id(self, case_number):
+        return self._tickets[case_number]['group_id']
+    
+    def jira_id(self, case_number):
+        return self._tickets[case_number]['custom_fields'][24]['value']
+    
+    def jira_stat(self, case_number):
+        return self._tickets[case_number]['custom_fields'][25]['value']

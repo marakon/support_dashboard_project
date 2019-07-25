@@ -31,6 +31,7 @@ def team_taken():
     raw = call.team_taken
     (handle.tickets, handle.ticket_count) = (raw, raw)
     lista = handle.tickets_per_agent()
+    print(lista)
     return lista
 
 def team_solved():
@@ -39,6 +40,7 @@ def team_solved():
     raw = call.team_solved
     (handle.tickets, handle.ticket_count) = (raw, raw)
     ludzie = handle.tickets_per_agent()
+    print(ludzie)
     return ludzie
 
 #==========================================================================================#
