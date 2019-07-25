@@ -12,16 +12,24 @@ tr {
 }
 
 table {
-    display: inline-block;
+    width: 100%;
     text-align: center;
     text-decoration: none;
 }
 
 th {
-    display: inline-block;
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
+    display: inline-flex;
+    text-align: left;
+    width: 5em;
+    padding: 20px;
+}
+
+td {
+    display: inline-flex;
+    text-align: left;
+    width: 5em;
+    padding: 20px;
+    overflow: hidden;
 }
 
 .ticket-list {
@@ -52,3 +60,4 @@ th {
 .big {
     height: 10%;
 }
+
