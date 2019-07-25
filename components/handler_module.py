@@ -101,8 +101,8 @@ class Calculate:
         for case_number in range(self._count):
             _ticket = []
             _ticket.append(self._tickets[case_number]['id'])
-            _ticket.append(self.is_null(self._tickets[case_number]['custom_fields'][5]['value']))
-            _ticket.append(self.is_null(self._tickets[case_number]['custom_fields'][15]['value']))
+            _ticket.append(self.name_check(self._tickets[case_number]['custom_fields'][5]['value']))
+            _ticket.append(self.name_check(self._tickets[case_number]['custom_fields'][15]['value']))
             _ticket.append(self.calculate_delta_time(case_number))
             _tickets.append(_ticket)
         return _tickets
