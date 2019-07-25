@@ -88,9 +88,9 @@ class Calculate:
         _views = []
         for view_number in range(self._count):
             _view = b.view
-            _view['id'] = self._views[view_number]['id']
-            _view['title'] = self._views[view_number]['title']
-            _view['active'] = self._views[view_number]['active']
+            _view['id'] = self.view_id(view_number)
+            _view['title'] = self.view_title(view_number)
+            _view['active'] = self.is_active_view(view_number)
             _views.append(_view)
         return _views
         
@@ -220,3 +220,12 @@ class Calculate:
     
     def jira_stat(self, case_number):
         return self._tickets[case_number]['custom_fields'][25]['value']
+
+    def view_id(self, view_number):
+        return self._views[view_number]['id']
+
+    def view_title(self, view_number):
+        return self._views[view_number]['title']
+
+    def is_active_view(self, view_number):
+        return self._views[view_number]['active']
