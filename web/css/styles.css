@@ -3,14 +3,20 @@
     text-align: center;
 }
 
-ul {
+tr {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-li {
+table {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+th {
     display: inline-block;
     text-align: center;
     padding: 14px;
