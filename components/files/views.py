@@ -36,5 +36,5 @@ view_team_solved = {
 view_not_answered = {
     'id':360067067931,
     'title':'Not answered since 48 hours'
-}
+    }
 # Add new views below in the same configuration.

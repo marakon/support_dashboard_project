@@ -6,7 +6,7 @@ from datetime import timedelta
 from components.files import blueprints as b
 import re
 
-class Calculate:
+class Handler:
     """ This class is processing data about tickets."""
     def __init__(self):
         self._tickets = None
@@ -30,23 +30,23 @@ class Calculate:
             self._views = loaded['views']
 
     @property
-    def premium_count(self):
+    def premium_ticket_count(self):
         """Returns premium count of the given view."""
         return self._premium
 
-    @premium_count.setter
-    def premium_count(self, loaded):
+    @premium_ticket_count.setter
+    def premium_ticket_count(self, loaded):
         for i in range(0, self._count):
             if self.support_plan(i) == 'premium':
                 self._premium += 1
 
     @property
-    def platinum_count(self):
+    def platinum_ticket_count(self):
         """Returns platinum count of the given view."""
         return self._platinum
 
-    @platinum_count.setter
-    def platinum_count(self, loaded):
+    @platinum_ticket_count.setter
+    def platinum_ticket_count(self, loaded):
         for i in range(0, self._count):
             if self.support_plan(i) == 'platinum':
                 self._platinum += 1
@@ -61,11 +61,11 @@ class Calculate:
         self._count = loaded['count']
     
     @property
-    def transfer_count(self):
+    def transfer_ticket_count(self):
         return self._transfer
 
-    @transfer_count.setter 
-    def  transfer_count(self, loaded):
+    @transfer_ticket_count.setter 
+    def  transfer_ticket_count(self, loaded):
         for i in range(0, self._count):
             if self.group_id(i) == 360002974692:
                 self._transfer += 1
@@ -82,7 +82,7 @@ class Calculate:
             for i in range(0,self._count):
                 print(self._tickets[i])
 
-    def all_views(self):
+    def all_queue_views(self):
         """ This function is preparing a new list of dict that will have
             ID, title and if the ticket is active."""
         _views = []
@@ -93,57 +93,22 @@ class Calculate:
             _view['active'] = self.is_active_view(view_number)
             _views.append(_view)
         return _views
-        
-    def unassigned_view(self):
-        """ This function is preparing a new list of dict that will have:
-            ID, domain_name, plan, created date."""
+
+    def get_view(self, view):
         _tickets = []
         for case_number in range(self._count):
             _ticket = []
-            _ticket.append(self.ticket_id(case_number))
-            _ticket.append(self.name_check(self.domain_name(case_number)))
-            _ticket.append(self.name_check(self.support_plan(case_number)))
-            _ticket.append(self.calculate_delta_time(case_number))
+            if 'Unassigned' == view:
+                _ticket.append(self.ticket_id(case_number))
+                _ticket.append(self.name_check(self.domain_name(case_number)))
+                _ticket.append(self.name_check(self.support_plan(case_number)))
+                _ticket.append(self.calculate_delta_time(case_number))
+            if 'NotAnswered' == view:
+                _ticket.append(self.ticket_id(case_number))
+                _ticket.append(self.name_check(self.domain_name(case_number)))
+                _ticket.append(self.assignee(case_number))
             _tickets.append(_ticket)
         return _tickets
-
-    def not_answered_view(self):
-        """ This function is preparing a new list of dict that will have:
-            ID, domain_name, plan, created date."""
-        _tickets = []
-        for case_number in range(self._count):
-            _ticket = []
-            _ticket.append(self.ticket_id(case_number))
-            _ticket.append(self.name_check(self.domain_name(case_number)))
-            _ticket.append(self.assignee(case_number))
-            _tickets.append(_ticket)
-        return _tickets
-
-    def jira_status_view(self):
-        """ This function is preparing a new list of dict that will
-            have details about JIRA tickets(number and status)."""
-        _tickets = []
-        for case_number in range(self._count):
-            (jira_number, jira_status) = (self.jira_id(case_number),
-                                          self.jira_stat(case_number))
-            if (isinstance(jira_number, str) and 'Waiting For Customer' in jira_status):
-                jira_ticket = b.jira_ticket
-                jira_ticket['number'] = jira_number
-                jira_ticket['status'] = jira_status
-                _tickets.append(jira_ticket)
-        return _tickets
-
-    def jira_not_updated(self):
-        #TODO:
-        # Check if ticket was updated lass than 3 days ago
-        """ This function is preparing a new list of dict that will
-            have details about JIRA tickets(number and status)."""
-        jira_tickets = []
-        for case_number in range(self._count):
-            jira_number = self.jira_id(case_number)
-            if isinstance(jira_number, str):
-                jira_tickets.append(jira_number)
-        return jira_tickets
 
     def tickets_per_agent(self):
         """ This function is preparing list with numbers of taken/solved cases by agent."""
@@ -174,10 +139,10 @@ class Calculate:
                                      seconds=created_time.second)
         alert = str(difference_delta.seconds//60%60) + ' min ago'
         return alert
-        
+
     def name_check(self, item):
         if item == None:
-            item = 'Not defined'
+            item = '---'
         if ',' in item:
             comma = item.find(',')
             item = item[:comma]
@@ -229,3 +194,32 @@ class Calculate:
 
     def is_active_view(self, view_number):
         return self._views[view_number]['active']
+
+
+    #JIRA functions
+
+    # def jira_status_view(self):
+    #     """ This function is preparing a new list of dict that will
+    #         have details about JIRA tickets(number and status)."""
+    #     _tickets = []
+    #     for case_number in range(self._count):
+    #         (jira_number, jira_status) = (self.jira_id(case_number),
+    #                                       self.jira_stat(case_number))
+    #         if (isinstance(jira_number, str) and 'Waiting For Customer' in jira_status):
+    #             jira_ticket = b.jira_ticket
+    #             jira_ticket['number'] = jira_number
+    #             jira_ticket['status'] = jira_status
+    #             _tickets.append(jira_ticket)
+    #     return _tickets
+
+    # def jira_not_updated(self):
+    #     #TODO:
+    #     # Check if ticket was updated lass than 3 days ago
+    #     """ This function is preparing a new list of dict that will
+    #         have details about JIRA tickets(number and status)."""
+    #     jira_tickets = []
+    #     for case_number in range(self._count):
+    #         jira_number = self.jira_id(case_number)
+    #         if isinstance(jira_number, str):
+    #             jira_tickets.append(jira_number)
+    #     return jira_tickets

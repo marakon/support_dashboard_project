@@ -8,39 +8,37 @@ eel.init("web")
 
 def unassigned():
     unassigned_call = call_module.ZendeskCall()
-    unassigned_handle = handler_module.Calculate()
+    unassigned_handle = handler_module.Handler()
     unassigned_raw = unassigned_call.unassigned_queue
     (unassigned_handle.tickets, unassigned_handle.ticket_count, \
-    unassigned_handle.platinum_count, unassigned_handle.premium_count, \
-    unassigned_handle.transfer_count) = (unassigned_raw, unassigned_raw, \
+    unassigned_handle.platinum_ticket_count, unassigned_handle.premium_ticket_count, \
+    unassigned_handle.transfer_ticket_count) = (unassigned_raw, unassigned_raw, \
                                          unassigned_raw, unassigned_raw, unassigned_raw)
-    unassigned_view = unassigned_handle.unassigned_view()
-    return unassigned_handle.ticket_count, unassigned_handle.platinum_count, unassigned_handle.premium_count, unassigned_handle.transfer_count, unassigned_view
+    unassigned_view = unassigned_handle.get_view('Unassigned')
+    return unassigned_handle.ticket_count, unassigned_handle.platinum_ticket_count, unassigned_handle.premium_ticket_count, unassigned_handle.transfer_ticket_count, unassigned_view
 
 def not_answered():
     not_answered_call = call_module.ZendeskCall()
-    not_answered_handle = handler_module.Calculate()
+    not_answered_handle = handler_module.Handler()
     not_answered_raw = not_answered_call.not_answered
     (not_answered_handle.tickets, not_answered_handle.ticket_count) = (not_answered_raw, not_answered_raw)
-    not_answered_view = not_answered_handle.not_answered_view()
+    not_answered_view = not_answered_handle.get_view('NotAnswered')
     return not_answered_view, not_answered_handle.ticket_count
 
 def team_taken():
     call = call_module.ZendeskCall()
-    handle = handler_module.Calculate()
+    handle = handler_module.Handler()
     raw = call.team_taken
     (handle.tickets, handle.ticket_count) = (raw, raw)
     lista = handle.tickets_per_agent()
-    print(lista)
     return lista
 
 def team_solved():
     call = call_module.ZendeskCall()
-    handle = handler_module.Calculate()
+    handle = handler_module.Handler()
     raw = call.team_solved
     (handle.tickets, handle.ticket_count) = (raw, raw)
     ludzie = handle.tickets_per_agent()
-    print(ludzie)
     return ludzie
 
 #==========================================================================================#

@@ -20,7 +20,6 @@ class ZendeskCall:
         self._team_taken = '{0}/{1}/tickets.json'.format(v.main_path, v.view_team_taken['id'])
         self._team_solved = '{0}/{1}/tickets.json'.format(v.main_path, v.view_team_solved['id'])
         self._not_answered = '{0}/{1}/tickets.json'.format(v.main_path, v.view_not_answered['id'])
-        # Space below to add more views
 
     @property
     def unassigned_queue(self):
