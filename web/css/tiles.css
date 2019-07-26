@@ -1,7 +1,9 @@
 body {
     margin-top: 50px;
     font-family: Helvetica;
-    background-color: rgb(27, 33, 59);
+   background-color: rgba(0, 0, 0, 0.75);
+    background-image: url("https://source.unsplash.com/uq2RvURcABM/1920x1080");
+    background-blend-mode: color;
 }
 
 .app {
@@ -18,7 +20,7 @@ body {
 }
 
 .item {
-    background-color: rgb(38, 45, 71);
+    background-color: rgb(38, 45, 71, 0.85);
     color: rgb(231, 231, 231);
     border-radius: 20px;
     font-size: 20px;
