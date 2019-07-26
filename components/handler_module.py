@@ -129,6 +129,7 @@ class Handler:
         return agents_list
 
     def calculate_delta_time(self, case_number):
+        """"Calculate delta between current time and created time."""
         created_time = datetime.strptime(self.created_at(case_number), '%Y-%m-%dT%H:%M:%SZ').time()
         now = datetime.time(datetime.utcnow().replace(microsecond=0))
         difference_delta = timedelta(hours=now.hour,
@@ -137,15 +138,10 @@ class Handler:
                          - timedelta(hours=created_time.hour,
                                      minutes=created_time.minute,
                                      seconds=created_time.second)
-        minutes = difference_delta.seconds//60%60
-        hours = difference_delta.seconds//3600
-        if hours >= 1:
-            alert = '{0}:{1}h'.format(hours, minutes)
-        else:
-            alert = '{0} mins'.format(minutes)
-        return alert
+        return self.date_view(difference_delta.seconds//3600, difference_delta.seconds//60%60)
 
     def name_check(self, item):
+        """Check if ticket contains one or more domain_names/support_plan."""
         if item == None:
             item = '---'
         if ',' in item:
@@ -154,6 +150,7 @@ class Handler:
         return item
     
     def assignee(self, case_number):
+        """Check who is assignee of the ticket."""
         agents_list = [
             "Mateusz",
             "Bartosz",
@@ -166,6 +163,13 @@ class Handler:
             if agent_id == self.assignee_id(case_number):
                 agent = agents_list[list_id]
         return agent
+    
+    def date_view(self, hours, minutes):
+        if hours >= 1:
+            alert = '{0}:{1}h'.format(hours, minutes)
+        else:
+            alert = '{0} mins'.format(minutes)
+        return alert
 
     def created_at(self, case_number):
         return self._tickets[case_number]['created_at']
