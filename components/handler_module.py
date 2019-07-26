@@ -137,7 +137,12 @@ class Handler:
                          - timedelta(hours=created_time.hour,
                                      minutes=created_time.minute,
                                      seconds=created_time.second)
-        alert = str(difference_delta.seconds//60%60) + ' min ago'
+        minutes = difference_delta.seconds//60%60
+        hours = difference_delta.seconds//3600
+        if hours >= 1:
+            alert = '{0}:{1}h'.format(hours, minutes)
+        else:
+            alert = '{0} mins'.format(minutes)
         return alert
 
     def name_check(self, item):
