@@ -53,6 +53,10 @@ def test_request():
     solved_tickets = team_solved()
     (na_view) = not_answered()
     
+<<<<<<< HEAD
+=======
+    eel.closureRate(solved_tickets)
+>>>>>>> 1c2703f6822e8f645b5c1b3182f7b6d020738cac
     eel.pickupRate(taken_list)
     eel.unassignedCount(un_Tickets)
     eel.unassignedPlatinum(un_platinum)

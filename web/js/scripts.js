@@ -33,6 +33,15 @@ function pickupRate(count) {
     document.getElementById("jak_pickup").innerHTML = count[4];
 }
 
+eel.expose(closureRate)
+function closureRate(count) {
+    document.getElementById("mat_closure").innerHTML = count[0];
+    document.getElementById("bart_closure").innerHTML = count[1];
+    document.getElementById("harsh_closure").innerHTML = count[2];
+    document.getElementById("woj_closure").innerHTML = count[3];
+    document.getElementById("jak_closure").innerHTML = count[4];
+}
+
 eel.expose(unassignedList);
 function unassignedList(list) {
     var ticketList = list;
