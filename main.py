@@ -14,7 +14,7 @@ def unassigned():
     unassigned_handle.platinum_ticket_count, unassigned_handle.premium_ticket_count, \
     unassigned_handle.divide_ticket_count) = (unassigned_raw, unassigned_raw, \
                                          unassigned_raw, unassigned_raw, unassigned_raw)
-    unassigned_tickets, transfer_tickets = unassigned_handle.divide_ticket_count
+    transfer_tickets, unassigned_tickets = unassigned_handle.divide_ticket_count
     unassigned_view = unassigned_handle.get_view('Unassigned')
     return unassigned_handle.platinum_ticket_count, unassigned_handle.premium_ticket_count, unassigned_view, unassigned_tickets, transfer_tickets
 
@@ -53,10 +53,7 @@ def test_request():
     solved_tickets = team_solved()
     (na_view) = not_answered()
     
-<<<<<<< HEAD
-=======
     eel.closureRate(solved_tickets)
->>>>>>> 1c2703f6822e8f645b5c1b3182f7b6d020738cac
     eel.pickupRate(taken_list)
     eel.unassignedCount(un_Tickets)
     eel.unassignedPlatinum(un_platinum)
