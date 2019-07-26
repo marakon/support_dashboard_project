@@ -15,6 +15,7 @@ class Handler:
         self._premium = 0
         self._platinum = 0
         self._transfer = 0
+        self._unassigned = 0
 
 #======================SETTERS====================GETTERS===================#
 
@@ -52,23 +53,25 @@ class Handler:
                 self._platinum += 1
 
     @property
-    def ticket_count(self):
+    def view_ticket_count(self):
         """Returns tickets count of the given view."""
         return self._count
 
-    @ticket_count.setter
-    def ticket_count(self, loaded):
+    @view_ticket_count.setter
+    def view_ticket_count(self, loaded):
         self._count = loaded['count']
     
     @property
-    def transfer_ticket_count(self):
-        return self._transfer
+    def divide_ticket_count(self):
+        return self._transfer, self._unassigned
 
-    @transfer_ticket_count.setter 
-    def  transfer_ticket_count(self, loaded):
+    @divide_ticket_count.setter 
+    def  divide_ticket_count(self, loaded):
         for i in range(0, self._count):
             if self.group_id(i) == 360002974692:
                 self._transfer += 1
+            if self.group_id(i) == None:
+                self._unassigned += 1
 
 #===========================================================================#
     @property
