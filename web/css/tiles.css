@@ -36,7 +36,7 @@ body {
 .b {
     position: relative;
     grid-column-start: 2;
-    grid-column-end: 4;
+    grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 2;
 }

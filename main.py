@@ -52,7 +52,7 @@ def test_request():
     solved_tickets = team_solved()
     (na_view, na_count) = not_answered()
     
-    print(solved_tickets)
+    eel.closureRate(solved_tickets)
     eel.pickupRate(taken_list)
     eel.unassignedCount(un_ticketCount)
     eel.unassignedPlatinum(un_platinum)
