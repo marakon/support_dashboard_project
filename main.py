@@ -77,4 +77,4 @@ ludzie = team_solved()
 # def ticket_count():
 #     return un_ticketCount
 
-eel.start("index.html", size=(1920, 1080))
+eel.start("index.html", mode=None, host='localhost', port=8080, size=(1920, 1080))
