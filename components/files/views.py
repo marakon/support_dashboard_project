@@ -26,15 +26,15 @@ view_open = {
     "title":"My Open tickets"
     }
 view_team_taken = {
-    'id':360066781132,
-    'title':'Team taken last 12h',
+    'id':360110425272,
+    'title':'Team tickets taken last 12h',
     }
 view_team_solved = {
-    'id':360095679811,
-    'title':'Team solved last 12h',
+    'id':360110564031,
+    'title':'Team tickets solved last 12h',
     }
 view_not_answered = {
-    'id':360067067931,
-    'title':'Not answered since 48 hours'
+    'id':360110427952,
+    'title':'Not answered greater than 48hours'
     }
 # Add new views below in the same configuration.
